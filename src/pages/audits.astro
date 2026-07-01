@@ -6,7 +6,7 @@ import SubmitButton from '../components/form/SubmitButton.astro';
 import { SITE } from '../lib/site';
 
 const inputClass =
-	'rounded-md border border-neutral-300 bg-white px-4 py-2.5 font-sans text-base text-neutral-900 transition-colors duration-base ease-standard placeholder:text-neutral-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400 data-[invalid=true]:border-danger';
+	'rounded-md border border-neutral-300 bg-white px-4 py-2.5 font-sans text-base text-neutral-900 transition-colors duration-base ease-standard placeholder:text-neutral-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 data-[invalid=true]:border-danger';
 ---
 
 <BaseLayout
@@ -14,7 +14,7 @@ const inputClass =
 	description="A free public audit series for service business websites. Submit your site for review."
 >
 	<section class="px-gutter mx-auto max-w-6xl pt-16 pb-12 sm:pt-24">
-		<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">Public audit series</p>
+		<p class="text-neutral-600 font-sans text-sm tracking-wide uppercase">Public audit series</p>
 		<h1 class="font-display mt-3 max-w-3xl text-5xl sm:text-6xl">
 			A free audit for service business websites.
 		</h1>
@@ -108,7 +108,7 @@ const inputClass =
 				Prefer email? Send your URL directly to{' '}
 				<a
 					href={`mailto:${SITE.email}`}
-					class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 underline decoration-2 underline-offset-4 transition-colors"
+					class="decoration-accent-500 duration-base ease-standard hover:text-accent-600 underline decoration-2 underline-offset-4 transition-colors"
 				>
 					{SITE.email}
 				</a>.

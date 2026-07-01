@@ -26,8 +26,14 @@ export function initAsyncForm(
 		if (errorEl) errorEl.textContent = isValid ? '' : field.validationMessage;
 	};
 
+	// Reads validity directly instead of calling form.checkValidity(), which
+	// synchronously fires `invalid` events on every invalid control — that
+	// would mark untouched fields as invalid (and show their errors) the
+	// moment the page loads or the user types into any other field.
+	const isFormValid = () => fields.every((field) => field.validity.valid);
+
 	const updateSubmitState = () => {
-		submitButton.disabled = !form.checkValidity();
+		submitButton.disabled = !isFormValid();
 	};
 
 	fields.forEach((field) => {

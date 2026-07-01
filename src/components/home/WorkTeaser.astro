@@ -18,7 +18,7 @@ const previewHighlights = featured.highlights.slice(0, 3);
 		>
 			<WorkThumbnail image={featured.image} alt={featured.imageAlt} loading="lazy" />
 			<div>
-				<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">
+				<p class="text-neutral-600 font-sans text-sm tracking-wide uppercase">
 					{featured.category} · {featured.year}
 				</p>
 				<h3 class="font-display mt-2 text-2xl text-neutral-900">{featured.name}</h3>
@@ -29,7 +29,7 @@ const previewHighlights = featured.highlights.slice(0, 3);
 					{
 						previewHighlights.map((item) => (
 							<li class="flex gap-2 font-sans text-sm text-neutral-600">
-								<span class="text-accent-400" aria-hidden="true">
+								<span class="text-accent-500" aria-hidden="true">
 									–
 								</span>
 								{item}
@@ -39,7 +39,7 @@ const previewHighlights = featured.highlights.slice(0, 3);
 				</ul>
 				<a
 					href={`/work/${featured.slug}`}
-					class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 mt-8 inline-flex items-center gap-2 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
+					class="decoration-accent-500 duration-base ease-standard hover:text-accent-600 mt-8 inline-flex items-center gap-2 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
 				>
 					See the full case study →
 				</a>

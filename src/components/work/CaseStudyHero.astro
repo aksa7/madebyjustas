@@ -10,7 +10,7 @@ const { project } = Astro.props;
 ---
 
 <section class="px-gutter mx-auto max-w-6xl pt-16 pb-12 sm:pt-24">
-	<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">
+	<p class="text-neutral-600 font-sans text-sm tracking-wide uppercase">
 		{project.category} · {project.year}
 	</p>
 	<h1 class="font-display mt-3 max-w-4xl text-5xl sm:text-6xl">{project.name}</h1>
@@ -36,7 +36,7 @@ const { project } = Astro.props;
 				href={project.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="bg-accent-500 duration-fast ease-standard hover:bg-accent-600 active:bg-accent-700 active:scale-[0.98] focus-visible:outline-accent-400 mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-medium text-white transition-[background-color,transform] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+				class="bg-accent-500 duration-fast ease-standard hover:bg-accent-600 hover:shadow-md active:bg-accent-700 active:scale-[0.98] active:shadow-sm focus-visible:outline-accent-500 mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-medium text-white shadow-sm transition-[background-color,box-shadow,transform] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
 			>
 				Visit site
 				<span aria-hidden="true">↗</span>

@@ -11,12 +11,12 @@ export const SERVICES: ServiceOffering[] = [
 		number: '01',
 		name: 'New Build',
 		summary:
-			'From scratch: discovery and content audit, a custom design system, a static Astro build, schema and GEO foundations, deployed to Cloudflare.',
+			'From scratch: discovery and content audit, a custom design system, a hand-coded build tailored to the project, schema and GEO foundations, deployed to Cloudflare.',
 		duration: '4–6 weeks',
 		deliverables: [
 			'Discovery and content audit',
 			'Custom design system',
-			'Static Astro build',
+			'Clean, hand-coded build tailored to the project',
 			'Schema and GEO foundations',
 			'Cloudflare deploy',
 			'2 rounds of revisions',
@@ -73,9 +73,10 @@ export const PROCESS_STEPS: ProcessStep[] = [
 	{
 		number: '02',
 		name: 'Build',
-		description: 'A static Astro build, hand-coded, deployed to Cloudflare Pages on a global CDN.',
+		description:
+			'A fast, hand-coded build with clean code, tailored to the project rather than one fixed stack.',
 		details: [
-			'Static Astro build',
+			'Clean code, tailored to the project',
 			'Hand-coded, no page builder',
 			'Cloudflare Pages deploy',
 			'Served from a global CDN',
@@ -127,7 +128,7 @@ export const SERVICES_FAQ: FaqItem[] = [
 	},
 ];
 
-export const PROOF_POINTS = ['50+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
+export const PROOF_POINTS = ['53+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
 
 export const LAST_SHIPPED = 'June 2026';
 
@@ -137,9 +138,9 @@ export interface ResultStat {
 }
 
 export const RESULT_STATS: ResultStat[] = [
-	{ value: '50+', label: 'Websites shipped' },
+	{ value: '53+', label: 'Websites shipped' },
 	{ value: '<1s', label: 'Typical load time' },
-	{ value: '100', label: 'Lighthouse score target' },
+	{ value: '90+', label: 'Lighthouse score we aim for' },
 	{ value: '0', label: 'Agencies in between' },
 ];
 

@@ -35,7 +35,7 @@ export default {
 			danger: '#a1352c',
 		},
 		fontFamily: {
-			display: ['"Fraunces Variable"', 'ui-serif', 'Georgia', 'serif'],
+			display: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 			sans: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 		},
 		fontSize: {

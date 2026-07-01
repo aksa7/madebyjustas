@@ -58,10 +58,11 @@ kūrėjas, kuriantis greitas, AI-optimizuotas svetaines paslaugų verslams.
   faile ar komponentuose — visada per `tailwind.config.js`. `src/styles/global.css`
   skirtas TIK: `@import 'tailwindcss'`, `@config`, font-face importai, `@layer base`
   (focus-visible, prefers-reduced-motion, body/heading base stiliai).
-- Fontai: self-hosted per `@fontsource-variable` (Fraunces — display/serif,
-  Inter — sans/body), woff2, `font-display: swap` (built-in), hero (Fraunces)
-  fontas preload'inamas `BaseLayout.astro` per Vite `?url` importą. Jokio Google
-  Fonts CDN.
+- Fontai: self-hosted per `@fontsource-variable` — vienas šriftas visame
+  puslapyje (Inter Variable, ir antraštėms, ir tekstui; hierarchija per svorį/
+  tarpus, ne per atskirą display šriftą), woff2, `font-display: swap`
+  (built-in), preload'inamas `BaseLayout.astro` per Vite `?url` importą. Jokio
+  Google Fonts CDN.
 - Animacijos: CSS/native 90% atvejų. Framer Motion TIK per React islands su
   client:visible ir TIK ten, kur CSS neužtenka. Jokio Framer Motion hover/fade smulkmenoms.
 - Nuotraukos: astro:assets (<Image/>) su width/height/aspect-ratio, WebP/AVIF, lazy load ne-hero.

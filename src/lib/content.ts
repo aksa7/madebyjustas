@@ -127,7 +127,19 @@ export const SERVICES_FAQ: FaqItem[] = [
 	},
 ];
 
-export const PROOF_POINTS = ['20+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
+export const PROOF_POINTS = ['50+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
+
+export interface ResultStat {
+	value: string;
+	label: string;
+}
+
+export const RESULT_STATS: ResultStat[] = [
+	{ value: '50+', label: 'Websites shipped' },
+	{ value: '<1s', label: 'Typical load time' },
+	{ value: '100', label: 'Lighthouse score target' },
+	{ value: '0', label: 'Agencies in between' },
+];
 
 export interface CaseStudySection {
 	heading: string;

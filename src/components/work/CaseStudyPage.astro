@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyHero from './CaseStudyHero.astro';
+import CaseStudySections from './CaseStudySections.astro';
+import CaseStudyHighlights from './CaseStudyHighlights.astro';
+import WorkJsonLd from './WorkJsonLd.astro';
+import CtaBanner from '../CtaBanner.astro';
+import type { WorkProject } from '../../lib/content';
+
+interface Props {
+	project: WorkProject;
+}
+
+const { project } = Astro.props;
+
+const sections = [
+	{ heading: 'Context', body: project.context },
+	{ heading: 'What I did', body: project.whatIDid },
+];
+---
+
+<BaseLayout title={project.name} description={project.summary} type="article">
+	<CaseStudyHero project={project} />
+	<CaseStudySections sections={sections} />
+	<CaseStudyHighlights highlights={project.highlights} />
+	<CtaBanner heading="Want a site like this?" buttonLabel="Contact" buttonHref="/contact" />
+	<WorkJsonLd project={project} />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div
+	data-reveal
+	class:list={[
+		'duration-slow ease-standard translate-y-4 opacity-0 transition-[opacity,transform] data-[visible]:translate-y-0 data-[visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none',
+		className,
+	]}
+>
+	<slot />
+</div>

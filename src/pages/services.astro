@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicesHero from '../components/services/ServicesHero.astro';
+import ServicesGrid from '../components/services/ServicesGrid.astro';
+import ServicesProcess from '../components/services/ServicesProcess.astro';
+import ServicesFaq from '../components/services/ServicesFaq.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { SERVICES_FAQ } from '../lib/content';
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: SERVICES_FAQ.map((item) => ({
+		'@type': 'Question',
+		name: item.question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: item.answer,
+		},
+	})),
+};
+---
+
+<BaseLayout
+	title="Services"
+	description="New builds, audits and maintenance for service business websites. Quote after a short discovery call."
+>
+	<ServicesHero />
+	<ServicesGrid />
+	<ServicesProcess />
+	<ServicesFaq />
+	<CtaBanner heading="Ready to start?" buttonLabel="Contact" buttonHref="/contact" />
+	<JsonLd schema={faqSchema} />
+</BaseLayout>

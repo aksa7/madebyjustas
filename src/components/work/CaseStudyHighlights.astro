@@ -1,0 +1,30 @@
+---
+import Reveal from '../Reveal.astro';
+
+interface Props {
+	highlights: string[];
+}
+
+const { highlights } = Astro.props;
+---
+
+<section class="px-gutter py-section mx-auto max-w-6xl">
+	<Reveal>
+		<h2 class="font-display text-3xl sm:text-4xl">Highlights</h2>
+	</Reveal>
+
+	<Reveal class="delay-150">
+		<ul class="mt-8 grid gap-3 sm:grid-cols-2">
+			{
+				highlights.map((item) => (
+					<li class="flex gap-2 font-sans text-sm text-neutral-600">
+						<span class="text-accent-400" aria-hidden="true">
+							–
+						</span>
+						{item}
+					</li>
+				))
+			}
+		</ul>
+	</Reveal>
+</section>

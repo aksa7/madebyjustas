@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.js';
+
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/inter/wght.css';
+
+@layer base {
+	:root {
+		color-scheme: light;
+	}
+
+	* {
+		@apply border-neutral-200;
+	}
+
+	html {
+		@apply scroll-smooth;
+	}
+
+	body {
+		@apply bg-neutral-50 font-sans text-base text-neutral-900 antialiased;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-display font-normal text-neutral-900;
+	}
+
+	/* Visible, high-contrast focus ring for keyboard navigation only. */
+	:focus {
+		outline: none;
+	}
+
+	:focus-visible {
+		@apply outline-accent-400 outline outline-2 outline-offset-2;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}

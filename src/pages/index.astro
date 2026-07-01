@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Manifesto from '../components/home/Manifesto.astro';
+import ServicesTeaser from '../components/home/ServicesTeaser.astro';
+import Process from '../components/home/Process.astro';
+import WorkTeaser from '../components/home/WorkTeaser.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+
+<BaseLayout
+	title="Home"
+	description="Fast, AI-optimized websites for service businesses. No agency overhead, direct communication, clear scope."
+>
+	<Hero />
+	<Manifesto />
+	<ServicesTeaser />
+	<Process />
+	<WorkTeaser />
+	<CtaBanner eyebrow="Availability" heading="Accepting 2 new projects for Q3 2026." />
+</BaseLayout>

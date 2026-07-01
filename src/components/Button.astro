@@ -1,0 +1,15 @@
+---
+import { BUTTON_BASE_CLASS, BUTTON_VARIANT_CLASS } from '../lib/button-styles';
+
+interface Props {
+	href: string;
+	variant?: 'primary' | 'secondary';
+	class?: string;
+}
+
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+---
+
+<a href={href} class:list={[BUTTON_BASE_CLASS, BUTTON_VARIANT_CLASS[variant], className]}>
+	<slot />
+</a>

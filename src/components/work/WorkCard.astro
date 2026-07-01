@@ -1,0 +1,61 @@
+---
+import WorkThumbnail from './WorkThumbnail.astro';
+import type { WorkProject } from '../../lib/content';
+
+interface Props {
+	project: WorkProject;
+	eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+---
+
+<article class="flex flex-col">
+	<a
+		href={`/work/${project.slug}`}
+		class="group block"
+		aria-label={`${project.name}: view case study`}
+	>
+		<WorkThumbnail
+			image={project.image}
+			alt={project.imageAlt}
+			loading={eager ? 'eager' : 'lazy'}
+			class="duration-base ease-standard group-hover:border-accent-300 transition-colors"
+		/>
+		<p class="text-accent-600 mt-4 font-sans text-xs tracking-wide uppercase">
+			{project.category}
+		</p>
+		<div class="mt-1 flex items-baseline justify-between gap-4">
+			<h2
+				class="font-display duration-base ease-standard group-hover:text-accent-600 text-xl text-neutral-900 transition-colors"
+			>
+				{project.name}
+			</h2>
+			<span class="shrink-0 font-sans text-sm text-neutral-500">{project.year}</span>
+		</div>
+		<p class="mt-2 font-sans text-sm text-neutral-500">{project.summary}</p>
+	</a>
+
+	<div class="mt-5 flex flex-wrap items-center gap-3">
+		{
+			project.url && (
+				<a
+					href={project.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="bg-accent-500 duration-base ease-standard hover:bg-accent-600 active:bg-accent-700 focus-visible:outline-accent-400 inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-sans text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+				>
+					Visit site
+					<span aria-hidden="true">↗</span>
+				</a>
+			)
+		}
+		<a
+			href={`/work/${project.slug}`}
+			class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
+		>
+			Case study
+			<span aria-hidden="true">→</span>
+		</a>
+	</div>
+</article>

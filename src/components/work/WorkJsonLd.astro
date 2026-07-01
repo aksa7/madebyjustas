@@ -1,0 +1,42 @@
+---
+import { SITE } from '../../lib/site';
+import type { WorkProject } from '../../lib/content';
+
+interface Props {
+	project: WorkProject;
+}
+
+const { project } = Astro.props;
+
+const pageUrl = `${SITE.url}/work/${project.slug}`;
+const imageUrl = new URL(project.image.src, SITE.url).toString();
+
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'CreativeWork',
+			name: project.name,
+			headline: `${project.name}: ${project.category} case study`,
+			description: project.summary,
+			url: pageUrl,
+			image: imageUrl,
+			datePublished: project.year,
+			author: { '@id': `${SITE.url}/#person` },
+			creator: { '@id': `${SITE.url}/#person` },
+			publisher: { '@id': `${SITE.url}/#organization` },
+			...(project.url ? { sameAs: [project.url] } : {}),
+		},
+		{
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+				{ '@type': 'ListItem', position: 2, name: 'Work', item: `${SITE.url}/work` },
+				{ '@type': 'ListItem', position: 3, name: project.name, item: pageUrl },
+			],
+		},
+	],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

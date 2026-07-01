@@ -1,0 +1,24 @@
+---
+import Reveal from '../Reveal.astro';
+import type { CaseStudySection } from '../../lib/content';
+
+interface Props {
+	sections: CaseStudySection[];
+}
+
+const { sections } = Astro.props;
+const delayClasses = ['', 'delay-150', 'delay-300', 'delay-500'];
+---
+
+<section class="px-gutter py-section mx-auto max-w-6xl">
+	<div class="grid gap-12 sm:grid-cols-2">
+		{
+			sections.map((section, index) => (
+				<Reveal class={delayClasses[index % delayClasses.length]}>
+					<h2 class="font-display text-2xl text-neutral-900">{section.heading}</h2>
+					<p class="mt-3 font-sans text-base text-neutral-600">{section.body}</p>
+				</Reveal>
+			))
+		}
+	</div>
+</section>

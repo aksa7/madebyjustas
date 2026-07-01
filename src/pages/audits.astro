@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.astro';
+import FormField from '../components/form/FormField.astro';
+import SubmitButton from '../components/form/SubmitButton.astro';
+import { SITE } from '../lib/site';
+
+const inputClass =
+	'rounded-md border border-neutral-300 bg-white px-4 py-2.5 font-sans text-base text-neutral-900 transition-colors duration-base ease-standard placeholder:text-neutral-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400 data-[invalid=true]:border-danger';
+---
+
+<BaseLayout
+	title="Audits"
+	description="A free public audit series for service business websites. Submit your site for review."
+>
+	<section class="px-gutter mx-auto max-w-6xl pt-16 pb-12 sm:pt-24">
+		<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">Public audit series</p>
+		<h1 class="font-display mt-3 max-w-3xl text-5xl sm:text-6xl">
+			A free audit for service business websites.
+		</h1>
+
+		<Reveal class="mt-6 max-w-2xl">
+			<p class="font-sans text-lg text-neutral-600 sm:text-xl">
+				Every audit examines five dimensions: speed, SEO, GEO, UX, and trust. The same process
+				behind every project.
+			</p>
+		</Reveal>
+	</section>
+
+	<section class="px-gutter py-section mx-auto max-w-6xl">
+		<div class="grid gap-12 sm:grid-cols-3">
+			<Reveal>
+				<h2 class="font-display text-2xl text-neutral-900">What it is</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					A free, public audit series for service business websites: clinics, studios, practices,
+					and similar businesses where speed and trust drive bookings.
+				</p>
+			</Reveal>
+
+			<Reveal class="delay-150">
+				<h2 class="font-display text-2xl text-neutral-900">What you'll get</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					A breakdown across speed, SEO, GEO, UX, and trust, plus a prioritized action list you can
+					act on immediately. No obligation.
+				</p>
+			</Reveal>
+
+			<Reveal class="delay-300">
+				<h2 class="font-display text-2xl text-neutral-900">How to submit</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					Share your site's URL and email below. Spots are limited and reviewed in the order they're
+					received.
+				</p>
+			</Reveal>
+		</div>
+	</section>
+
+	<section class="px-gutter py-section mx-auto max-w-6xl">
+		<Reveal class="delay-150">
+			<form data-async-form="audit" class="max-w-xl space-y-6" novalidate>
+				<input type="hidden" name="_subject" value="Free audit request via madebyjustas.dev" />
+				<input
+					type="text"
+					name="_gotcha"
+					tabindex="-1"
+					autocomplete="off"
+					class="hidden"
+					aria-hidden="true"
+				/>
+				<FormField id="audit-url" label="Website URL">
+					<input
+						id="audit-url"
+						name="siteUrl"
+						type="url"
+						inputmode="url"
+						placeholder="https://example.com"
+						autocomplete="url"
+						required
+						aria-describedby="audit-url-error"
+						class={inputClass}
+					/>
+				</FormField>
+
+				<FormField id="audit-email" label="Email">
+					<input
+						id="audit-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						required
+						aria-describedby="audit-email-error"
+						class={inputClass}
+					/>
+				</FormField>
+
+				<SubmitButton label="Request an audit" />
+			</form>
+
+			<p
+				data-form-status="audit"
+				role="status"
+				aria-live="polite"
+				class="data-[state=error]:text-danger data-[state=success]:text-success mt-6 max-w-xl font-sans text-sm"
+			>
+			</p>
+
+			<p class="mt-4 max-w-xl font-sans text-xs text-neutral-500">
+				Prefer email? Send your URL directly to{' '}
+				<a
+					href={`mailto:${SITE.email}`}
+					class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 underline decoration-2 underline-offset-4 transition-colors"
+				>
+					{SITE.email}
+				</a>.
+			</p>
+		</Reveal>
+	</section>
+
+	<script>
+		import { initAsyncForm } from '../lib/async-form';
+		import { AUDIT_FORM_ENDPOINT, SITE } from '../lib/site';
+
+		const form = document.querySelector<HTMLFormElement>('[data-async-form="audit"]');
+		const status = document.querySelector<HTMLElement>('[data-form-status="audit"]');
+
+		if (form && status) {
+			initAsyncForm(form, status, AUDIT_FORM_ENDPOINT, {
+				success: "Thanks, I'll review your site and follow up by email.",
+				error: `Something went wrong. Please try again, or email ${SITE.email} directly.`,
+			});
+		}
+	</script>
+</BaseLayout>

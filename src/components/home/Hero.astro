@@ -1,0 +1,42 @@
+---
+import Button from '../Button.astro';
+import Reveal from '../Reveal.astro';
+import { PROOF_POINTS } from '../../lib/content';
+---
+
+<section class="relative isolate overflow-hidden">
+	<div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+		<div
+			class="absolute -top-40 right-[-12%] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,#f2ddc9_0%,transparent_70%)] opacity-45"
+		>
+		</div>
+		<div
+			class="absolute bottom-[-18rem] left-[-14%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,#e5e1d6_0%,transparent_70%)] opacity-40"
+		>
+		</div>
+	</div>
+
+	<div class="px-gutter pb-section mx-auto max-w-6xl pt-10 sm:pt-14 lg:pt-16">
+		<h1 class="font-display max-w-4xl text-5xl sm:text-6xl">
+			Websites that get your business found, trusted, and booked.
+		</h1>
+
+		<Reveal class="mt-6 max-w-2xl">
+			<p class="font-sans text-lg text-neutral-600 sm:text-xl">
+				Fast, hand-coded sites for service businesses, engineered to rank on Google and AI search,
+				earn trust in seconds, and turn visitors into customers.
+			</p>
+		</Reveal>
+
+		<Reveal class="mt-8 flex flex-wrap gap-4 delay-150">
+			<Button href="/contact" variant="primary">Start a project</Button>
+			<Button href="/work" variant="secondary">See the work</Button>
+		</Reveal>
+
+		<Reveal class="mt-12 border-t border-neutral-200 pt-8 delay-300">
+			<p class="font-sans text-sm text-neutral-500">
+				{PROOF_POINTS.join(' · ')}
+			</p>
+		</Reveal>
+	</div>
+</section>

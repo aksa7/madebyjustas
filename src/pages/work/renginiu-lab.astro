@@ -1,0 +1,9 @@
+---
+import CaseStudyPage from '../../components/work/CaseStudyPage.astro';
+import { WORK_PROJECTS } from '../../lib/content';
+
+const project = WORK_PROJECTS.find((item) => item.slug === 'renginiu-lab');
+if (!project) throw new Error('renginiu-lab project not found in WORK_PROJECTS');
+---
+
+<CaseStudyPage project={project} />

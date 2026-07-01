@@ -1,0 +1,49 @@
+---
+import Reveal from '../Reveal.astro';
+import WorkThumbnail from '../work/WorkThumbnail.astro';
+import { WORK_PROJECTS } from '../../lib/content';
+
+const featured = WORK_PROJECTS[0];
+const previewHighlights = featured.highlights.slice(0, 3);
+---
+
+<section class="px-gutter py-section mx-auto max-w-6xl">
+	<Reveal>
+		<h2 class="font-display text-3xl sm:text-4xl">Work</h2>
+	</Reveal>
+
+	<Reveal class="delay-150">
+		<div
+			class="mt-12 grid gap-8 rounded-md border border-neutral-200 bg-white p-8 shadow-sm sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12"
+		>
+			<WorkThumbnail image={featured.image} alt={featured.imageAlt} loading="lazy" />
+			<div>
+				<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">
+					{featured.category} · {featured.year}
+				</p>
+				<h3 class="font-display mt-2 text-2xl text-neutral-900">{featured.name}</h3>
+				<p class="mt-4 font-sans text-base text-neutral-600">
+					{featured.summary}
+				</p>
+				<ul class="mt-6 space-y-2">
+					{
+						previewHighlights.map((item) => (
+							<li class="flex gap-2 font-sans text-sm text-neutral-600">
+								<span class="text-accent-400" aria-hidden="true">
+									–
+								</span>
+								{item}
+							</li>
+						))
+					}
+				</ul>
+				<a
+					href={`/work/${featured.slug}`}
+					class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 mt-8 inline-flex items-center gap-2 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
+				>
+					See the full case study →
+				</a>
+			</div>
+		</div>
+	</Reveal>
+</section>

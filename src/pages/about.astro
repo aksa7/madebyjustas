@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { SITE } from '../lib/site';
+---
+
+<BaseLayout
+	title="About"
+	description="Justas Aksamitauskas, an independent web developer building fast, findable websites for service businesses."
+>
+	<section class="px-gutter mx-auto max-w-6xl pt-16 pb-12 sm:pt-24">
+		<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">About</p>
+		<h1 class="font-display mt-3 max-w-3xl text-4xl sm:text-6xl">Justas Aksamitauskas</h1>
+
+		<Reveal class="mt-6 max-w-2xl">
+			<p class="font-sans text-lg text-neutral-600 sm:text-xl">
+				Independent web developer for service businesses.
+			</p>
+		</Reveal>
+
+		<Reveal class="mt-6 delay-150">
+			<a
+				href={SITE.linkedin}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="decoration-accent-400 duration-base ease-standard hover:text-accent-600 inline-flex items-center gap-2 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
+			>
+				Connect on LinkedIn →
+			</a>
+		</Reveal>
+	</section>
+
+	<section class="px-gutter py-section mx-auto max-w-6xl">
+		<div class="grid gap-12 sm:grid-cols-3">
+			<Reveal>
+				<h2 class="font-display text-2xl text-neutral-900">Background</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					I'm Justas, an independent web developer with a software engineering background, now
+					focused entirely on websites for service businesses. Over 20+ projects, I've built sites
+					for everything from solo-operator clinics to multi-location, multi-practitioner
+					businesses.
+				</p>
+			</Reveal>
+
+			<Reveal class="delay-150">
+				<h2 class="font-display text-2xl text-neutral-900">Philosophy</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					Most of that work follows the same principle: a website is technically capable of being
+					fast, well-structured, and easy to find. Most just aren't built with the discipline to get
+					there. No unnecessary frameworks, no bloated page builders, no schema or SEO left as an
+					afterthought. Speed and structure get decided on day one, not patched in later.
+				</p>
+			</Reveal>
+
+			<Reveal class="delay-300">
+				<h2 class="font-display text-2xl text-neutral-900">Who I work with</h2>
+				<p class="mt-3 font-sans text-base text-neutral-600">
+					The clients I work best with are service businesses where trust and visibility directly
+					drive bookings: med spas, aesthetics clinics, legal practices, hospitality, and wellness.
+					If that's you, let's talk.
+				</p>
+			</Reveal>
+		</div>
+	</section>
+
+	<CtaBanner heading="Let's talk about your project." buttonLabel="Contact" buttonHref="/contact" />
+</BaseLayout>

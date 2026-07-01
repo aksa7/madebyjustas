@@ -1,0 +1,53 @@
+---
+import { SITE } from '../lib/site';
+
+const personId = `${SITE.url}/#person`;
+const organizationId = `${SITE.url}/#organization`;
+
+const ogImageURL = new URL(SITE.defaultOgImage, SITE.url).toString();
+
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Person',
+			'@id': personId,
+			name: SITE.author,
+			url: SITE.url,
+			email: SITE.email,
+			jobTitle: 'Web Developer',
+			description:
+				'Independent web developer building fast, AI-optimized websites for service businesses.',
+			knowsAbout: [
+				'Web development',
+				'Astro',
+				'Search engine optimization (SEO)',
+				'Generative engine optimization (GEO)',
+				'Web performance',
+			],
+			sameAs: [SITE.linkedin],
+		},
+		{
+			'@type': 'ProfessionalService',
+			'@id': organizationId,
+			name: SITE.name,
+			url: SITE.url,
+			email: SITE.email,
+			image: ogImageURL,
+			description:
+				'Fast, AI-optimized websites for service businesses. New builds, audits, and maintenance with SEO and GEO baked in from day one.',
+			founder: { '@id': personId },
+			areaServed: 'Worldwide',
+			serviceType: [
+				'Website design and development',
+				'Website audit and optimization',
+				'SEO and GEO optimization',
+				'Website maintenance',
+			],
+			sameAs: [SITE.linkedin],
+		},
+	],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

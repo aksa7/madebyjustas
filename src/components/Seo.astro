@@ -1,0 +1,55 @@
+---
+import { SITE } from '../lib/site';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	imageAlt?: string;
+	type?: 'website' | 'article';
+	canonical?: string;
+	noindex?: boolean;
+}
+
+const {
+	title,
+	description = SITE.defaultDescription,
+	image = SITE.defaultOgImage,
+	imageAlt = 'madebyjustas.dev: fast, AI-optimized websites for service businesses.',
+	type = 'website',
+	canonical,
+	noindex = false,
+} = Astro.props;
+
+const pageTitle = `${title} · ${SITE.name}`;
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, SITE.url).toString();
+const ogImageURL = new URL(image, SITE.url).toString();
+---
+
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{
+	noindex ? (
+		<meta name="robots" content="noindex, nofollow" />
+	) : (
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+	)
+}
+
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content={SITE.name} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content={imageAlt} />

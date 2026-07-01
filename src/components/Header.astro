@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import { NAV_LINKS } from '../lib/site';
+import wordmark from '../assets/logo/wordmark.png';
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => (href.replace(/\/+$/, '') || '/') === currentPath;
+---
+
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/90 backdrop-blur">
+	<div class="px-gutter relative z-50 mx-auto flex max-w-6xl items-center justify-between py-4">
+		<a
+			href="/"
+			aria-label="madebyjustas home"
+			class="focus-visible:outline-accent-400 -m-2 inline-flex items-center rounded-md p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+		>
+			<Image
+				src={wordmark}
+				alt="madebyjustas"
+				width={288}
+				loading="eager"
+				class="h-7 w-auto sm:h-8"
+			/>
+		</a>
+
+		<nav aria-label="Primary" class="hidden md:block">
+			<ul class="flex items-center gap-8">
+				{
+					NAV_LINKS.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-current={isActive(link.href) ? 'page' : undefined}
+								class:list={[
+									'duration-base ease-standard after:bg-accent-400 after:duration-base after:ease-standard relative py-1 font-sans text-sm transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:transition-transform hover:text-neutral-900',
+									isActive(link.href)
+										? 'text-neutral-900 after:scale-x-100'
+										: 'text-neutral-600 after:scale-x-0 hover:after:scale-x-100',
+								]}
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<button
+			type="button"
+			data-menu-toggle
+			data-state="closed"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+			aria-label="Open menu"
+			class="group focus-visible:outline-accent-400 inline-flex h-10 w-10 items-center justify-center rounded-md text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden"
+		>
+			<span class="sr-only">Toggle navigation menu</span>
+			<span class="relative block h-4 w-5">
+				<span
+					class="duration-base ease-standard absolute top-0 left-0 h-0.5 w-5 bg-current transition-transform group-data-[state=open]:translate-y-1.5 group-data-[state=open]:rotate-45"
+				></span>
+				<span
+					class="duration-base ease-standard absolute top-1.5 left-0 h-0.5 w-5 bg-current transition-opacity group-data-[state=open]:opacity-0"
+				></span>
+				<span
+					class="duration-base ease-standard absolute top-3 left-0 h-0.5 w-5 bg-current transition-transform group-data-[state=open]:-translate-y-1.5 group-data-[state=open]:-rotate-45"
+				></span>
+			</span>
+		</button>
+	</div>
+
+	<div
+		id="mobile-menu"
+		data-menu-panel
+		data-state="closed"
+		aria-hidden="true"
+		class="duration-base ease-standard relative z-50 grid grid-rows-[0fr] overflow-hidden border-b border-neutral-200 bg-neutral-50 transition-[grid-template-rows] data-[state=open]:grid-rows-[1fr] md:hidden"
+	>
+		<nav aria-label="Mobile" class="min-h-0">
+			<ul class="px-gutter flex flex-col gap-1 py-4">
+				{
+					NAV_LINKS.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-current={isActive(link.href) ? 'page' : undefined}
+								class:list={[
+									'duration-base ease-standard block rounded-md px-3 py-3 font-sans text-base transition-colors hover:bg-neutral-100 hover:text-neutral-900',
+									isActive(link.href) ? 'text-neutral-900' : 'text-neutral-700',
+								]}
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<div
+	data-menu-backdrop
+	data-state="closed"
+	class="duration-base ease-standard fixed inset-0 z-40 bg-neutral-900/30 opacity-0 transition-opacity data-[state=closed]:pointer-events-none data-[state=open]:opacity-100 md:hidden"
+>
+</div>
+
+<script>
+	import { initMobileMenu } from '../lib/mobile-menu';
+	initMobileMenu();
+</script>

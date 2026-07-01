@@ -1,0 +1,29 @@
+---
+import { BUTTON_BASE_CLASS, BUTTON_VARIANT_CLASS } from '../../lib/button-styles';
+
+interface Props {
+	label: string;
+	class?: string;
+}
+
+const { label, class: className = '' } = Astro.props;
+---
+
+<button
+	type="submit"
+	data-submit-button
+	disabled
+	class:list={[
+		BUTTON_BASE_CLASS,
+		BUTTON_VARIANT_CLASS.primary,
+		'gap-2 disabled:cursor-not-allowed disabled:opacity-50',
+		className,
+	]}
+>
+	<span
+		data-submit-spinner
+		aria-hidden="true"
+		class="hidden h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none"
+	></span>
+	<span data-submit-label>{label}</span>
+</button>

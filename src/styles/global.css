@@ -24,7 +24,7 @@
 	h2,
 	h3,
 	h4 {
-		@apply font-display font-semibold tracking-tight text-neutral-900;
+		@apply font-display leading-tight font-semibold tracking-tight text-neutral-900;
 	}
 
 	/* Visible, high-contrast focus ring for keyboard navigation only. */

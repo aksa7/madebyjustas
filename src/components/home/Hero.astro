@@ -1,7 +1,8 @@
 ---
 import Button from '../Button.astro';
 import Reveal from '../Reveal.astro';
-import { PROOF_POINTS } from '../../lib/content';
+import { PROOF_POINTS, LAST_SHIPPED } from '../../lib/content';
+import { GRAIN_BACKGROUND } from '../../lib/decor';
 ---
 
 <section class="relative isolate overflow-hidden">
@@ -14,9 +15,21 @@ import { PROOF_POINTS } from '../../lib/content';
 			class="absolute bottom-[-18rem] left-[-14%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,#e5e1d6_0%,transparent_70%)] opacity-40"
 		>
 		</div>
+		<div
+			class="absolute inset-0 opacity-[0.05] mix-blend-multiply"
+			style={{ backgroundImage: `url("${GRAIN_BACKGROUND}")` }}
+		>
+		</div>
 	</div>
 
 	<div class="px-gutter pb-section mx-auto max-w-6xl pt-10 sm:pt-14 lg:pt-16">
+		<Reveal>
+			<p class="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1 font-sans text-xs text-neutral-600">
+				<span class="bg-success h-1.5 w-1.5 rounded-full" aria-hidden="true"></span>
+				Last shipped: {LAST_SHIPPED}
+			</p>
+		</Reveal>
+
 		<h1 class="font-display max-w-4xl text-5xl sm:text-6xl">
 			Websites that get your business found, trusted, and booked.
 		</h1>

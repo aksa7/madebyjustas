@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.astro';
+import Button from '../components/Button.astro';
+import { NAV_LINKS } from '../lib/site';
+---
+
+<BaseLayout
+	title="Page not found"
+	description="This page doesn't exist. Find your way back to madebyjustas.dev."
+	noindex
+>
+	<section class="px-gutter mx-auto max-w-6xl pt-24 pb-section text-center sm:pt-32">
+		<Reveal>
+			<p class="text-accent-600 font-sans text-sm tracking-wide uppercase">404</p>
+			<h1 class="font-display mx-auto mt-3 max-w-2xl text-4xl sm:text-5xl">
+				This page took a wrong turn.
+			</h1>
+			<p class="mx-auto mt-4 max-w-md font-sans text-base text-neutral-600 sm:text-lg">
+				The page you're looking for doesn't exist, or has moved.
+			</p>
+		</Reveal>
+
+		<Reveal class="mt-8 flex flex-wrap justify-center gap-4 delay-150">
+			<Button href="/" variant="primary">Back to home</Button>
+			<Button href="/work" variant="secondary">See the work</Button>
+		</Reveal>
+
+		<Reveal class="mt-16 border-t border-neutral-200 pt-8 delay-300">
+			<p class="font-sans text-sm text-neutral-500">Or head straight to a section</p>
+			<ul class="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2">
+				{
+					NAV_LINKS.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="decoration-accent-400 duration-fast ease-standard hover:text-accent-600 font-sans text-sm font-medium text-neutral-900 underline decoration-2 underline-offset-4 transition-colors"
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</Reveal>
+	</section>
+</BaseLayout>

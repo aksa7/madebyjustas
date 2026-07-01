@@ -129,6 +129,8 @@ export const SERVICES_FAQ: FaqItem[] = [
 
 export const PROOF_POINTS = ['50+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
 
+export const LAST_SHIPPED = 'June 2026';
+
 export interface ResultStat {
 	value: string;
 	label: string;

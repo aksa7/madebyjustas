@@ -3,12 +3,22 @@ import { SITE } from '../lib/site';
 
 const personId = `${SITE.url}/#person`;
 const organizationId = `${SITE.url}/#organization`;
+const websiteId = `${SITE.url}/#website`;
 
 const ogImageURL = new URL(SITE.defaultOgImage, SITE.url).toString();
 
 const schema = {
 	'@context': 'https://schema.org',
 	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': websiteId,
+			name: SITE.name,
+			url: SITE.url,
+			description: SITE.defaultDescription,
+			inLanguage: 'en-US',
+			publisher: { '@id': organizationId },
+		},
 		{
 			'@type': 'Person',
 			'@id': personId,

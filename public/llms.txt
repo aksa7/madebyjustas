@@ -1,0 +1,46 @@
+# madebyjustas.dev
+
+> Independent web developer building fast, AI-optimized websites for service businesses. No agency overhead — direct communication, clear scope. 53+ websites shipped. Sub-1s load times. GEO + SEO baked in from day one.
+
+## About
+
+- [Home](https://madebyjustas.dev/): Positioning, proof points, process overview, and recent work.
+- [About](https://madebyjustas.dev/about/): Background, approach, and how projects are run.
+- [Services](https://madebyjustas.dev/services/): New Build, Audit & Optimize, and Maintenance — with FAQ.
+- [Work](https://madebyjustas.dev/work/): Portfolio and case studies with before/after performance context.
+- [Contact](https://madebyjustas.dev/contact/): Start a project or ask a question.
+- [Audits](https://madebyjustas.dev/audits/): Free public audit series for service business websites.
+
+## Services
+
+- **New Build** — Discovery, custom design system, hand-coded build tailored to the project, schema + GEO foundations, Cloudflare deploy. 4–6 weeks.
+- **Audit & Optimize** — 5-dimension audit (speed, SEO, GEO, UX, trust), prioritized action list, speed and schema fixes. 2–3 weeks.
+- **Maintenance** — Monthly performance + GEO citation report, content/build updates, priority response.
+
+Pricing: quote after a short discovery call.
+
+## Process
+
+1. **Audit** — Speed, SEO, GEO, UX, trust.
+2. **Build** — Clean, hand-coded code tailored to the project; deployed on Cloudflare Pages with global CDN.
+3. **Rank** — Schema markup, FAQ structure, local SEO from day one.
+
+## Case studies
+
+- [Blumu](https://madebyjustas.dev/work/blumu/): Conversion-focused marketing site for a local-services marketplace app.
+- [Tvorteka](https://madebyjustas.dev/work/tvorteka/): Multi-page manufacturer site with product catalogue, price calculator, and local SEO.
+- [Renginių LAB](https://madebyjustas.dev/work/renginiu-lab/): Event venue site with occasion-based structure and deep FAQ for Google and AI search.
+- [inSpotlight](https://madebyjustas.dev/work/events-agency/): Agency portfolio with cinematic video hero.
+- [Decks&Stories](https://madebyjustas.dev/work/decks-and-stories/): Global music platform with custom audio player and scalable content architecture.
+- [Work index](https://madebyjustas.dev/work/): Full portfolio.
+
+## Contact
+
+- Email: info@madebyjustas.dev
+- LinkedIn: https://www.linkedin.com/in/justas-aksamitauskas-196133279/
+- Website: https://madebyjustas.dev
+
+## Optional
+
+- [Sitemap](https://madebyjustas.dev/sitemap-index.xml)
+- [Robots](https://madebyjustas.dev/robots.txt)

@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# GEO: structured site summary for AI crawlers
+# https://madebyjustas.dev/llms.txt
+
 Sitemap: https://madebyjustas.dev/sitemap-index.xml

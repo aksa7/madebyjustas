@@ -153,6 +153,7 @@ import type { ImageMetadata } from 'astro';
 import decksImage from '../assets/work/decks-and-stories.png';
 import tvortekaImage from '../assets/work/tvorteka.png';
 import blumuImage from '../assets/work/blumu.png';
+import blumuAppImage from '../assets/work/blumu-app.png';
 import eventsAgencyImage from '../assets/work/events-agency.png';
 import renginiuLabImage from '../assets/work/renginiu-lab.png';
 
@@ -175,12 +176,14 @@ export interface WorkProject {
 	image: ImageMetadata;
 	/** Alt text for the project image. */
 	imageAlt: string;
+	/** Portrait screenshots (e.g. mobile apps) use contain instead of cover. */
+	imageFit?: 'cover' | 'contain';
 }
 
 export const WORK_PROJECTS: WorkProject[] = [
 	{
 		slug: 'blumu',
-		name: 'Blumu',
+		name: 'Blumu Web',
 		category: 'Product',
 		role: 'Web Developer & Designer',
 		year: '2026',
@@ -307,5 +310,38 @@ export const WORK_PROJECTS: WorkProject[] = [
 		stack: ['Hand-coded static HTML/CSS/JS', 'WebP/AVIF assets', 'Custom JS audio player'],
 		image: decksImage,
 		imageAlt: 'Decks&Stories website homepage with the platform logo',
+	},
+	{
+		slug: 'blumu-app',
+		name: 'Blumu App',
+		category: 'Mobile app',
+		role: 'Full-Stack Developer',
+		year: '2026',
+		url: 'https://blumu.eu',
+		summary:
+			'A React Native (Expo) marketplace app connecting clients with local service providers on iOS and Android from a single codebase — with a NestJS backend, real-time messaging, Stripe subscriptions, and production security hardening ahead of App Store launch.',
+		context:
+			'Blumu is a geolocation-based marketplace where clients post tasks and verified local pros respond in real time — 0% commission, direct in-app chat, ratings. The mobile app is the core product; blumu-web is the public-facing launch presence.',
+		whatIDid:
+			'Built the cross-platform app in React Native (Expo) and the API in NestJS with PostgreSQL (Prisma ORM) on Railway. Shipped JWT auth with email verification, a multi-step tasker onboarding wizard, admin moderation with email notifications, and real-time messaging with proposal accept/reject. Integrated Stripe for subscription billing — setup intents, webhook processing with idempotency and retry safety, and a trial → active → expired lifecycle with automated cron reminders. Hardened production security before App Store submission: rate limiting (NestJS Throttler), HTTP security headers (Helmet), strict CORS, and trust proxy config for Railway. Also built blumu-web, the public marketing site for the platform.',
+		highlights: [
+			'Single Expo codebase shipping to both iOS and Android',
+			'JWT auth with email verification and multi-step tasker onboarding',
+			'Admin moderation flow with email notifications',
+			'Real-time messaging with proposal accept/reject',
+			'Stripe subscriptions: setup intents, idempotent webhooks, trial lifecycle + cron reminders',
+			'Production hardening: Throttler rate limiting, Helmet, strict CORS, Railway trust proxy',
+		],
+		stack: [
+			'React Native (Expo)',
+			'NestJS',
+			'PostgreSQL + Prisma',
+			'Railway',
+			'Stripe',
+			'JWT + email verification',
+		],
+		image: blumuAppImage,
+		imageAlt: 'Blumu mobile app welcome screen on iOS',
+		imageFit: 'contain',
 	},
 ];

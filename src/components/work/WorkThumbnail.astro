@@ -8,6 +8,7 @@ interface Props {
 	loading?: 'eager' | 'lazy';
 	sizes?: string;
 	class?: string;
+	fit?: 'cover' | 'contain';
 }
 
 const {
@@ -16,12 +17,18 @@ const {
 	loading = 'lazy',
 	sizes = '(min-width: 640px) 560px, 100vw',
 	class: className = '',
+	fit = 'cover',
 } = Astro.props;
+
+const imageClass = fit === 'contain' ? 'object-contain' : 'object-cover';
+const frameClass =
+	fit === 'contain' ? 'bg-neutral-900' : 'bg-neutral-100';
 ---
 
 <div
 	class:list={[
-		'aspect-video overflow-hidden rounded-md border border-neutral-200 bg-neutral-100',
+		'aspect-video overflow-hidden rounded-md border border-neutral-200',
+		frameClass,
 		className,
 	]}
 >
@@ -33,6 +40,6 @@ const {
 		loading={loading}
 		decoding={loading === 'eager' ? 'auto' : 'async'}
 		fetchpriority={loading === 'eager' ? 'high' : 'auto'}
-		class="h-full w-full object-cover"
+		class:list={['h-full w-full', imageClass]}
 	/>
 </div>

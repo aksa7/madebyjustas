@@ -27,7 +27,8 @@ Pricing: quote after a short discovery call.
 
 ## Case studies
 
-- [Blumu](https://madebyjustas.dev/work/blumu/): Conversion-focused marketing site for a local-services marketplace app.
+- [Blumu Web](https://madebyjustas.dev/work/blumu/): Conversion-focused marketing site for a local-services marketplace app.
+- [Blumu App](https://madebyjustas.dev/work/blumu-app/): React Native marketplace app with NestJS backend, Stripe subscriptions, and real-time messaging.
 - [Tvorteka](https://madebyjustas.dev/work/tvorteka/): Multi-page manufacturer site with product catalogue, price calculator, and local SEO.
 - [Renginių LAB](https://madebyjustas.dev/work/renginiu-lab/): Event venue site with occasion-based structure and deep FAQ for Google and AI search.
 - [inSpotlight](https://madebyjustas.dev/work/events-agency/): Agency portfolio with cinematic video hero.

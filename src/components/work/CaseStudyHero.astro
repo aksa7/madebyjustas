@@ -47,6 +47,7 @@ const { project } = Astro.props;
 	<WorkThumbnail
 		image={project.image}
 		alt={project.imageAlt}
+		fit={project.imageFit}
 		loading="eager"
 		sizes="(min-width: 1152px) 1152px, 100vw"
 		class="mt-12"

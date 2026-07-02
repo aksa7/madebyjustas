@@ -1,0 +1,9 @@
+---
+import CaseStudyPage from '../../components/work/CaseStudyPage.astro';
+import { WORK_PROJECTS } from '../../lib/content';
+
+const project = WORK_PROJECTS.find((item) => item.slug === 'blumu-app');
+if (!project) throw new Error('blumu-app project not found in WORK_PROJECTS');
+---
+
+<CaseStudyPage project={project} />

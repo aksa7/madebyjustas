@@ -19,6 +19,7 @@ const { project, eager = false } = Astro.props;
 		<WorkThumbnail
 			image={project.image}
 			alt={project.imageAlt}
+			fit={project.imageFit}
 			loading={eager ? 'eager' : 'lazy'}
 			class="duration-base ease-standard group-hover:border-neutral-300 transition-colors"
 		/>

@@ -78,7 +78,7 @@ export default {
 			56: '14rem',
 			64: '16rem',
 			gutter: 'clamp(1.25rem, 4vw, 3rem)',
-			section: 'clamp(4rem, 8vw, 8rem)',
+			section: 'clamp(2.5rem, 5vw, 5rem)',
 		},
 		borderRadius: {
 			none: '0px',

@@ -1,0 +1,45 @@
+---
+interface Props {
+	size?: 'sm' | 'md';
+}
+
+const { size = 'md' } = Astro.props;
+
+const stampClass =
+	size === 'md'
+		? 'gap-3 px-2.5 py-2 sm:px-3 sm:py-2.5'
+		: 'gap-2.5 px-2 py-1.5';
+
+const iconWrapClass = size === 'md' ? 'h-10 w-10 sm:h-11 sm:w-11' : 'h-8 w-8';
+
+const textClass = size === 'md' ? 'text-base sm:text-lg' : 'text-sm';
+---
+
+<span
+	class:list={[
+		'inline-flex items-center rounded-full border border-neutral-200 bg-white shadow-sm ring-1 ring-neutral-200/50',
+		stampClass,
+	]}
+>
+	<span
+		class:list={[
+			'flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent-200 bg-accent-100',
+			iconWrapClass,
+		]}
+	>
+		<img
+			src="/apple-touch-icon.png"
+			alt=""
+			width="44"
+			height="44"
+			class="h-[88%] w-[88%] object-contain"
+			loading="eager"
+			decoding="async"
+		/>
+	</span>
+	<span
+		class:list={['pr-0.5 font-display font-semibold tracking-tight text-neutral-900', textClass]}
+	>
+		madebyjustas<span class="text-warm">.dev</span>
+	</span>
+</span>

@@ -1,26 +1,19 @@
 ---
-import { Image } from 'astro:assets';
+import Logo from './Logo.astro';
 import { NAV_LINKS } from '../lib/site';
-import wordmark from '../assets/logo/wordmark.png';
 
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) => (href.replace(/\/+$/, '') || '/') === currentPath;
 ---
 
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
-	<div class="px-gutter relative z-50 mx-auto flex max-w-6xl items-center justify-between py-4">
+	<div class="px-gutter relative z-50 mx-auto flex max-w-6xl items-center justify-between py-3.5 sm:py-4">
 		<a
 			href="/"
 			aria-label="madebyjustas home"
-			class="focus-visible:outline-accent-500 -m-2 inline-flex items-center rounded-md p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+			class="focus-visible:outline-accent-500 group -m-2 inline-flex rounded-full p-2 transition-shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:[&>span]:shadow-md"
 		>
-			<Image
-				src={wordmark}
-				alt="madebyjustas"
-				width={288}
-				loading="eager"
-				class="h-6 w-auto sm:h-7"
-			/>
+			<Logo />
 		</a>
 
 		<nav aria-label="Primary" class="hidden md:block">

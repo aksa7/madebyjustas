@@ -1,39 +1,156 @@
 @import 'tailwindcss';
-@config '../../tailwind.config.js';
 
-@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/archivo/standard.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import 'lenis/dist/lenis.css';
+
+/*
+ * Velvet Noir design tokens: the single source for colour, type, radius and
+ * motion. Tailwind turns them into utilities (bg-ink, text-bone, font-display,
+ * ease-cinema…) and the same names are available as CSS variables
+ * (var(--color-bone)) inside component styles.
+ */
+@theme {
+	--color-*: initial;
+	--color-transparent: transparent;
+	--color-current: currentColor;
+	--color-ink: #0e0c0d;
+	--color-carbon: #191617;
+	--color-rouge: #4a0d1b;
+	--color-amaranth: #6a1328;
+	--color-red: #b4202c;
+	--color-red-light: #e04848;
+	--color-red-deep: #9e1b2a;
+	--color-bone: #ece4d6;
+	--color-bone-muted: #aba196;
+	--color-bone-dim: #736b63;
+
+	--font-*: initial;
+	--font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	/* Fluid type, interpolated between 375px and 1600px viewports. */
+	--text-*: initial;
+	--text-xs: clamp(0.75rem, 0.73rem + 0.08vw, 0.8125rem);
+	--text-xs--line-height: 1.5;
+	--text-sm: clamp(0.875rem, 0.86rem + 0.08vw, 0.9375rem);
+	--text-sm--line-height: 1.55;
+	--text-base: clamp(1rem, 0.98rem + 0.08vw, 1.0625rem);
+	--text-base--line-height: 1.65;
+	--text-lg: clamp(1.125rem, 1.07rem + 0.24vw, 1.3125rem);
+	--text-lg--line-height: 1.6;
+	--text-xl: clamp(1.25rem, 1.17rem + 0.33vw, 1.5rem);
+	--text-xl--line-height: 1.45;
+	--text-2xl: clamp(1.5rem, 1.35rem + 0.65vw, 2rem);
+	--text-2xl--line-height: 1.2;
+	--text-3xl: clamp(2rem, 1.77rem + 0.98vw, 2.75rem);
+	--text-3xl--line-height: 1.1;
+	--text-4xl: clamp(2.5rem, 2.12rem + 1.63vw, 3.75rem);
+	--text-4xl--line-height: 1.04;
+	--text-5xl: clamp(3rem, 2.39rem + 2.61vw, 5rem);
+	--text-5xl--line-height: 1;
+	--text-6xl: clamp(3.25rem, 2.33rem + 3.92vw, 6.25rem);
+	--text-6xl--line-height: 0.98;
+	/* Display sizes that also respect short viewports (laptops, landscape phones). */
+	--text-hero: min(clamp(2.5rem, 1.5rem + 4.3vw, 6.25rem), 11svh);
+	--text-hero--line-height: 0.98;
+	--text-statement: min(clamp(1.75rem, 1.2rem + 2.2vw, 3.5rem), 6svh);
+	--text-statement--line-height: 1.18;
+
+	--tracking-label: 0.2em;
+	--tracking-wordmark: 0.34em;
+	--tracking-display: -0.03em;
+
+	--radius-*: initial;
+	--radius-sm: 0.25rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 0.875rem;
+	--radius-full: 9999px;
+
+	--ease-*: initial;
+	--ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+	color-scheme: dark;
+	--gutter: clamp(1.25rem, 4.5vw, 4rem);
+	--section-y: clamp(5rem, 12vw, 10rem);
+	--content-max: 78rem;
+	--dur-fast: 180ms;
+	--dur-base: 320ms;
+	--dur-slow: 700ms;
+	--nav-h: 4.5rem;
+	--tap: 2.75rem;
+	--hairline: color-mix(in oklab, var(--color-bone) 14%, transparent);
+	--hairline-strong: color-mix(in oklab, var(--color-bone) 28%, transparent);
+	--grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 @layer base {
-	:root {
-		color-scheme: light;
-	}
-
-	* {
-		@apply border-neutral-200;
-	}
-
 	html {
-		@apply scroll-smooth;
+		background-color: var(--color-ink);
+		-webkit-text-size-adjust: 100%;
+	}
+
+	html.is-loading {
+		overflow: hidden;
 	}
 
 	body {
-		@apply bg-neutral-50 font-sans text-base text-neutral-900 antialiased;
+		@apply bg-ink font-sans text-base text-bone antialiased;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
 	}
 
+	/*
+	 * Display type: Archivo at a confident medium weight, slightly extended and
+	 * tightly tracked. Clear at every size, no hairlines to lose.
+	 */
 	h1,
 	h2,
 	h3,
-	h4 {
-		@apply font-display leading-tight font-semibold tracking-tight text-neutral-900;
+	h4,
+	.display {
+		@apply font-display text-balance;
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
 	}
 
-	/* Visible, high-contrast focus ring for keyboard navigation only. */
+	body {
+		font-variation-settings: 'wdth' 100;
+	}
+
+	/* The brand never uses italics. */
+	em,
+	i,
+	cite {
+		font-style: normal;
+	}
+
+	::selection {
+		background-color: var(--color-amaranth);
+		color: var(--color-bone);
+	}
+
 	:focus {
 		outline: none;
 	}
 
 	:focus-visible {
-		@apply outline-accent-500 outline outline-2 outline-offset-2;
+		outline: 2px solid var(--color-red-light);
+		outline-offset: 4px;
+		border-radius: 2px;
+	}
+
+	img,
+	video {
+		max-width: 100%;
+		height: auto;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -45,5 +162,123 @@
 			transition-duration: 0.01ms !important;
 			scroll-behavior: auto !important;
 		}
+	}
+}
+
+@layer components {
+	/* Small mono metadata: eyebrows, categories, years. */
+	.label {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+		color: var(--color-red-light);
+	}
+
+	.container-page {
+		width: 100%;
+		max-width: var(--content-max);
+		margin-inline: auto;
+		padding-inline: var(--gutter);
+	}
+
+	/* Buttons: bone on the dark scenes, oxblood on the bone finale. */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		min-height: 3.25rem;
+		padding-inline: 1.75rem;
+		border-radius: var(--radius-full);
+		font-family: var(--font-sans);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		letter-spacing: 0.02em;
+		white-space: nowrap;
+		transition:
+			background-color var(--dur-base) var(--ease-cinema),
+			color var(--dur-base) var(--ease-cinema),
+			border-color var(--dur-base) var(--ease-cinema);
+	}
+
+	.btn-arrow {
+		display: inline-block;
+		transition: transform var(--dur-base) var(--ease-cinema);
+	}
+
+	.btn:hover .btn-arrow,
+	.btn:focus-visible .btn-arrow {
+		transform: translateX(0.25rem);
+	}
+
+	.btn-primary {
+		background-color: var(--color-bone);
+		color: var(--color-ink);
+	}
+
+	.btn-primary:hover {
+		background-color: var(--color-red-light);
+	}
+
+	.btn-ghost {
+		border: 1px solid var(--hairline-strong);
+		color: var(--color-bone);
+	}
+
+	.btn-ghost:hover {
+		border-color: var(--color-bone);
+	}
+
+	.btn:active {
+		transition-duration: var(--dur-fast);
+		opacity: 0.85;
+	}
+
+	[data-theme='light'] .btn-primary {
+		background-color: var(--color-rouge);
+		color: var(--color-bone);
+	}
+
+	[data-theme='light'] .btn-primary:hover {
+		background-color: var(--color-amaranth);
+	}
+
+	[data-theme='light'] :focus-visible {
+		outline-color: var(--color-rouge);
+	}
+
+	.link-underline {
+		background-image: linear-gradient(currentColor, currentColor);
+		background-size: 100% 1px;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		padding-bottom: 2px;
+		transition: background-size var(--dur-base) var(--ease-cinema);
+	}
+
+	.link-underline:hover {
+		background-size: 0% 1px;
+		background-position: 100% 100%;
+	}
+}
+
+@layer components {
+	.skip-link {
+		position: fixed;
+		top: 0.75rem;
+		left: 0.75rem;
+		z-index: 130;
+		padding: 0.75rem 1.25rem;
+		border-radius: var(--radius-full);
+		background-color: var(--color-bone);
+		color: var(--color-ink);
+		font-size: var(--text-sm);
+		transform: translateY(-200%);
+		transition: transform var(--dur-base) var(--ease-cinema);
+	}
+
+	.skip-link:focus-visible {
+		transform: none;
 	}
 }

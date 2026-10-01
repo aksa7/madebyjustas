@@ -7,8 +7,82 @@ interface Props {
 const { id, label } = Astro.props;
 ---
 
-<div class="flex flex-col gap-1.5">
-	<label for={id} class="font-sans text-sm font-medium text-neutral-900">{label}</label>
+<div class="field">
+	<label for={id} class="field-label">{label}</label>
 	<slot />
-	<p id={`${id}-error`} class="text-danger min-h-5 font-sans text-xs" role="alert"></p>
+	<p id={`${id}-error`} class="field-error" role="alert"></p>
 </div>
+
+<style>
+	.field {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.field-label {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+	}
+
+	.field :global(input),
+	.field :global(select),
+	.field :global(textarea) {
+		width: 100%;
+		min-height: 3.25rem;
+		padding: 0.75rem 0;
+		border: 0;
+		border-bottom: 1px solid color-mix(in oklab, currentColor 30%, transparent);
+		border-radius: 0;
+		background-color: transparent;
+		font-size: var(--text-lg);
+		color: inherit;
+		transition: border-color var(--dur-base) var(--ease-cinema);
+	}
+
+	.field :global(textarea) {
+		min-height: 8rem;
+		resize: vertical;
+	}
+
+	.field :global(select) {
+		appearance: none;
+		background-image:
+			linear-gradient(45deg, transparent 50%, currentColor 50%),
+			linear-gradient(135deg, currentColor 50%, transparent 50%);
+		background-position:
+			calc(100% - 0.75rem) 55%,
+			calc(100% - 0.4rem) 55%;
+		background-size: 0.35rem 0.35rem;
+		background-repeat: no-repeat;
+	}
+
+	.field :global(::placeholder) {
+		color: color-mix(in oklab, currentColor 45%, transparent);
+	}
+
+	.field :global(input:hover),
+	.field :global(select:hover),
+	.field :global(textarea:hover) {
+		border-bottom-color: color-mix(in oklab, currentColor 60%, transparent);
+	}
+
+	.field :global(input:focus-visible),
+	.field :global(select:focus-visible),
+	.field :global(textarea:focus-visible) {
+		outline: none;
+		border-bottom-color: currentColor;
+		box-shadow: 0 1px 0 0 currentColor;
+	}
+
+	.field :global([data-invalid='true']) {
+		border-bottom-color: var(--color-amaranth);
+	}
+
+	.field-error {
+		min-height: 1.25rem;
+		font-size: var(--text-xs);
+		color: var(--color-amaranth);
+	}
+</style>

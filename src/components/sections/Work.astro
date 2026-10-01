@@ -1,0 +1,501 @@
+---
+import { getImage } from 'astro:assets';
+import { PROJECTS, WORK_CTA } from '../../lib/content';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const projects = await Promise.all(
+	PROJECTS.map(async (project) => ({
+		...project,
+		wide: await getImage({
+			src: project.desktop,
+			widths: [720, 1200, 1800],
+			format: 'webp',
+			quality: 78,
+		}),
+		tall: await getImage({
+			src: project.mobile,
+			widths: [400, 640, 900],
+			format: 'webp',
+			quality: 76,
+		}),
+	})),
+);
+---
+
+<section
+	id="work"
+	class="work"
+	data-work
+	style={`--count: ${projects.length}`}
+	aria-labelledby="work-title"
+>
+	<div class="work-pin" data-work-pin>
+		<div class="work-stage">
+			<div class="container-page work-grid">
+				<header class="work-head">
+					<p class="label">Selected work · 2025–2026</p>
+					<h2 id="work-title" class="work-title">A few things I've built lately.</h2>
+				</header>
+
+				<div class="work-screen-wrap">
+					<div class="work-screen" data-work-screen>
+						<span class="work-corner" data-corner="tl" aria-hidden="true"></span>
+						<span class="work-corner" data-corner="tr" aria-hidden="true"></span>
+						<span class="work-corner" data-corner="bl" aria-hidden="true"></span>
+						<span class="work-corner" data-corner="br" aria-hidden="true"></span>
+						<div class="work-viewport">
+							<ul class="work-reel" data-work-reel aria-label="Project screenshots">
+								{
+									projects.map((project) => (
+										<li class="work-card" data-work-card>
+											<picture>
+												<source
+													media="(max-width: 767px)"
+													srcset={project.tall.srcSet.attribute}
+													sizes="(max-width: 767px) 70vw"
+												/>
+												<img
+													src={project.wide.src}
+													srcset={project.wide.srcSet.attribute}
+													sizes="(min-width: 1024px) 60vw, 90vw"
+													width={project.wide.attributes.width}
+													height={project.wide.attributes.height}
+													alt={project.alt}
+													loading="lazy"
+													decoding="async"
+												/>
+											</picture>
+										</li>
+									))
+								}
+							</ul>
+							<div class="work-sweep" data-work-sweep aria-hidden="true"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="work-captions">
+					{
+						projects.map((project, i) => (
+							<article class="work-text" data-work-text aria-labelledby={`work-${project.slug}`}>
+								<p class="label" data-work-line>
+									{pad(i + 1)} · {project.category}
+								</p>
+								<h3 id={`work-${project.slug}`} class="work-name" data-work-line>
+									{project.name}
+								</h3>
+								<p class="work-desc" data-work-line>
+									{project.description}
+								</p>
+								<p class="work-meta" data-work-line>
+									{project.role} · {project.year}
+								</p>
+								<p data-work-line>
+									<a
+										href={project.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="work-visit"
+									>
+										Visit site <span aria-hidden="true">↗</span>
+										<span class="sr-only">: {project.name} (opens in a new tab)</span>
+									</a>
+								</p>
+							</article>
+						))
+					}
+				</div>
+
+				<div class="work-controls" aria-label="Browse projects" role="group">
+					<button type="button" class="work-btn" data-work-prev aria-label="Previous project">
+						<span aria-hidden="true">←</span>
+					</button>
+					<p class="work-count">
+						<span data-work-count>01</span>
+						<span class="work-count-total">/ {pad(projects.length)}</span>
+					</p>
+					<button type="button" class="work-btn" data-work-next aria-label="Next project">
+						<span aria-hidden="true">→</span>
+					</button>
+					<button type="button" class="work-pause" data-work-pause aria-pressed="false">
+						<span data-pause-label>Pause</span> autoplay
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="work-after container-page" data-reveal>
+		<p class="work-after-line">{WORK_CTA.line}</p>
+		<a href="#contact" class="btn btn-ghost" data-magnetic>
+			{WORK_CTA.cta}
+			<span class="btn-arrow" aria-hidden="true">→</span>
+		</a>
+	</div>
+</section>
+
+<style>
+	.work {
+		position: relative;
+		padding-block: var(--section-y);
+		background:
+			radial-gradient(
+				ellipse 60% 45% at 70% 55%,
+				color-mix(in oklab, var(--color-rouge) 35%, transparent),
+				transparent 70%
+			),
+			var(--color-ink);
+	}
+
+	.work-grid {
+		display: grid;
+		gap: 2.5rem;
+	}
+
+	.work-title {
+		margin-top: 1rem;
+		max-width: 14ch;
+		font-size: var(--text-4xl);
+		line-height: var(--text-4xl--line-height);
+	}
+
+	/* ---- The screen: carbon frame, bone hairline, red-deep viewfinder corners. ---- */
+	.work-screen-wrap {
+		perspective: 1400px;
+		min-width: 0;
+	}
+
+	.work-screen {
+		position: relative;
+		padding: clamp(0.35rem, 0.8vw, 0.6rem);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+		background-color: var(--color-carbon);
+		box-shadow:
+			0 3rem 8rem -2rem color-mix(in oklab, var(--color-amaranth) 55%, transparent),
+			0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.7);
+	}
+
+	.work-corner {
+		position: absolute;
+		width: 1rem;
+		height: 1rem;
+		border-color: var(--color-red-light);
+		border-style: solid;
+		border-width: 0;
+		pointer-events: none;
+	}
+
+	.work-corner[data-corner='tl'] {
+		top: -0.6rem;
+		left: -0.6rem;
+		border-top-width: 1px;
+		border-left-width: 1px;
+	}
+
+	.work-corner[data-corner='tr'] {
+		top: -0.6rem;
+		right: -0.6rem;
+		border-top-width: 1px;
+		border-right-width: 1px;
+	}
+
+	.work-corner[data-corner='bl'] {
+		bottom: -0.6rem;
+		left: -0.6rem;
+		border-bottom-width: 1px;
+		border-left-width: 1px;
+	}
+
+	.work-corner[data-corner='br'] {
+		right: -0.6rem;
+		bottom: -0.6rem;
+		border-right-width: 1px;
+		border-bottom-width: 1px;
+	}
+
+	.work-viewport {
+		position: relative;
+		border-radius: var(--radius-md);
+		overflow: hidden;
+	}
+
+	/* Base layout (phones, tablets, reduced motion): a swipeable track. */
+	.work-reel {
+		display: flex;
+		gap: 0.75rem;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.work-reel::-webkit-scrollbar {
+		display: none;
+	}
+
+	.work-card {
+		position: relative;
+		flex: 0 0 min(68vw, 20rem);
+		aspect-ratio: 9 / 16;
+		scroll-snap-align: start;
+		border-radius: var(--radius-sm);
+		overflow: hidden;
+		background-color: var(--color-ink);
+	}
+
+	.work-card::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: var(--color-ink);
+		opacity: var(--dim, 0);
+		pointer-events: none;
+	}
+
+	.work-card img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+	}
+
+	.work-sweep {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			100deg,
+			transparent 30%,
+			color-mix(in oklab, var(--color-bone) 22%, transparent) 50%,
+			transparent 70%
+		);
+		mix-blend-mode: screen;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	/* ---- Captions: every project's text is in the DOM; JS shows the active one. ---- */
+	.work-captions {
+		display: grid;
+		gap: 3rem;
+	}
+
+	.work[data-caption='on'] .work-captions {
+		gap: 0;
+	}
+
+	.work[data-caption='on'] .work-text {
+		grid-area: 1 / 1;
+	}
+
+	.work-text {
+		display: grid;
+		align-content: start;
+		gap: 0.85rem;
+	}
+
+	.work-name {
+		font-size: var(--text-3xl);
+		line-height: var(--text-3xl--line-height);
+	}
+
+	.work-desc {
+		max-width: 32rem;
+		color: var(--color-bone-muted);
+	}
+
+	.work-meta {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: 0.08em;
+		color: var(--color-bone-dim);
+	}
+
+	.work-visit {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		min-height: var(--tap);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-bone);
+		background-image: linear-gradient(currentColor, currentColor);
+		background-size: 100% 1px;
+		background-position: 0 calc(100% - 0.6rem);
+		background-repeat: no-repeat;
+		transition: color var(--dur-base) var(--ease-cinema);
+	}
+
+	.work-visit:hover {
+		color: var(--color-red-light);
+	}
+
+	.work-after {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		margin-top: clamp(3rem, 6vw, 5rem);
+		padding-top: 2rem;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.work-after-line {
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-2xl);
+		line-height: var(--text-2xl--line-height);
+		max-width: 22ch;
+	}
+
+	/* ---- Controls ---- */
+	.work-controls {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.work-btn {
+		display: grid;
+		place-items: center;
+		width: var(--tap);
+		height: var(--tap);
+		border: 1px solid var(--hairline-strong);
+		border-radius: var(--radius-full);
+		transition:
+			border-color var(--dur-base) var(--ease-cinema),
+			opacity var(--dur-base) var(--ease-cinema);
+	}
+
+	.work-btn:hover {
+		border-color: var(--color-bone);
+	}
+
+	.work-btn[aria-disabled='true'] {
+		opacity: 0.3;
+	}
+
+	.work-count {
+		min-width: 4.5rem;
+		text-align: center;
+		font-family: var(--font-mono);
+		font-size: var(--text-sm);
+		letter-spacing: 0.08em;
+	}
+
+	.work-count-total {
+		color: var(--color-bone-dim);
+	}
+
+	.work-pause {
+		margin-left: auto;
+		min-height: var(--tap);
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+		color: var(--color-bone-muted);
+		transition: color var(--dur-base) var(--ease-cinema);
+	}
+
+	.work-pause:hover {
+		color: var(--color-bone);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.work-pause {
+			display: none;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.work-card {
+			flex-basis: 82%;
+			aspect-ratio: 16 / 10;
+		}
+
+		.work-card img {
+			object-position: top center;
+		}
+	}
+
+	/* ---- Desktop: the screen becomes a 3D reel that scrolling turns. ---- */
+	@media (min-width: 1024px) {
+		.work-grid {
+			max-width: 96rem;
+			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.45fr);
+			grid-template-areas:
+				'head screen'
+				'captions screen'
+				'controls screen';
+			grid-template-rows: auto 1fr auto;
+			column-gap: clamp(3rem, 5vw, 6rem);
+			row-gap: 2rem;
+			align-items: start;
+		}
+
+		.work-head {
+			grid-area: head;
+		}
+
+		.work-screen-wrap {
+			grid-area: screen;
+			align-self: center;
+		}
+
+		.work-captions {
+			grid-area: captions;
+		}
+
+		.work-controls {
+			grid-area: controls;
+		}
+	}
+
+	:global(html[data-reel='on']) .work {
+		padding-top: 0;
+	}
+
+	/* The reel scrolls through this tall block; the CTA band waits below it. */
+	:global(html[data-reel='on']) .work-pin {
+		height: calc(100svh + (var(--count) - 1) * 75svh);
+	}
+
+	:global(html[data-reel='on']) .work-stage {
+		position: sticky;
+		top: 0;
+		height: 100svh;
+		display: grid;
+		align-items: center;
+		padding-top: var(--nav-h);
+	}
+
+	:global(html[data-reel='on']) .work-grid {
+		max-height: calc(100svh - var(--nav-h) - 2rem);
+	}
+
+	:global(html[data-reel='on']) .work-viewport {
+		aspect-ratio: 16 / 10;
+		perspective: 2200px;
+	}
+
+	:global(html[data-reel='on']) .work-reel {
+		position: absolute;
+		inset: 0;
+		display: block;
+		overflow: visible;
+		transform-style: preserve-3d;
+		will-change: transform;
+	}
+
+	:global(html[data-reel='on']) .work-card {
+		position: absolute;
+		inset: 0;
+		aspect-ratio: auto;
+		backface-visibility: hidden;
+	}
+</style>

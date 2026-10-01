@@ -1,0 +1,50 @@
+<a href="#contact" class="sticky-cta" data-sticky-cta data-visible="false" inert>
+	<span class="sticky-dot" aria-hidden="true"></span>
+	<span>Let's talk</span>
+</a>
+
+<style>
+	.sticky-cta {
+		position: fixed;
+		right: var(--gutter);
+		bottom: max(1rem, env(safe-area-inset-bottom));
+		z-index: 40;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-height: 3rem;
+		padding-inline: 1.25rem;
+		border-radius: var(--radius-full);
+		background-color: var(--color-bone);
+		color: var(--color-ink);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		box-shadow: 0 1rem 2.5rem -1rem rgb(0 0 0 / 0.6);
+		opacity: 0;
+		transform: translateY(1rem);
+		pointer-events: none;
+		transition:
+			opacity var(--dur-slow) var(--ease-cinema),
+			transform var(--dur-slow) var(--ease-cinema);
+	}
+
+	.sticky-cta[data-visible='true'] {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+	}
+
+	.sticky-dot {
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: var(--radius-full);
+		background-color: var(--color-red);
+	}
+
+	/* On larger screens the header carries the same invitation. */
+	@media (min-width: 1024px) {
+		.sticky-cta {
+			display: none;
+		}
+	}
+</style>

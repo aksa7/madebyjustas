@@ -1,0 +1,12 @@
+# The old multi-page site now lives on one page. Old links land on the right section.
+/work /#work 301
+/work/ /#work 301
+/work/* /#work 301
+/services /#services 301
+/services/ /#services 301
+/about /#about 301
+/about/ /#about 301
+/contact /#contact 301
+/contact/ /#contact 301
+/audits /#contact 301
+/audits/ /#contact 301

@@ -1,11 +1,11 @@
 # madebyjustas.dev
 
-Portfolio site for Justas Aksamitauskas, an independent web developer building
-fast, AI-optimized websites for service businesses.
+A single-page, cinematic portfolio for Justas Aksamitauskas, an independent web
+developer who builds fast, beautiful websites for service businesses.
 
-Built with **Astro** (static output), **Tailwind CSS v4**, and self-hosted
-variable fonts. No client-side framework, no page builder. Deployed to
-**Cloudflare Pages**.
+Built with **Astro** (static output), **Tailwind CSS v4** (CSS-first `@theme`
+tokens), **GSAP + ScrollTrigger + SplitText** and **Lenis** smooth scroll, plus
+self-hosted variable fonts. No client-side framework. Deployed to **Cloudflare**.
 
 ## Requirements
 
@@ -15,37 +15,44 @@ variable fonts. No client-side framework, no page builder. Deployed to
 
 Run from the project root:
 
-| Command                | Action                                          |
-| :--------------------- | :---------------------------------------------- |
-| `npm install`          | Install dependencies                            |
-| `npm run dev`          | Start the dev server at `localhost:4321`        |
-| `npm run build`        | Build the production site to `./dist/`          |
-| `npm run preview`      | Preview the production build locally            |
-| `npm run typecheck`    | Type-check with `astro check`                   |
-| `npm run lint`         | Lint with ESLint                                |
-| `npm run format`       | Format with Prettier                            |
+| Command             | Action                                   |
+| :------------------ | :--------------------------------------- |
+| `npm install`       | Install dependencies                     |
+| `npm run dev`       | Start the dev server at `localhost:4321` |
+| `npm run build`     | Build the production site to `./dist/`   |
+| `npm run preview`   | Preview the production build locally     |
+| `npm run typecheck` | Type-check with `astro check`            |
+| `npm run lint`      | Lint with ESLint                         |
+| `npm run format`    | Format with Prettier                     |
 
 ## Project structure
 
 ```text
-public/            Static assets served as-is (favicon, og-default.jpg, _headers, robots.txt)
+public/              Served as-is: favicons, og.jpg, hero videos (media/), _headers, _redirects, llms.txt
 src/
-  assets/work/     Project images, optimized at build time via astro:assets
-  components/       UI components (home, work, services, form, shared)
-  layouts/          BaseLayout (head, SEO, schema, header/footer)
-  lib/              Site config, content data, small client scripts
-  pages/            Routes (index, work, services, about, contact, audits + /work/[slug])
-  styles/           global.css (Tailwind entry, @config, fonts, base layer)
-tailwind.config.js  Design tokens (colors, type scale, spacing, radius, shadow, motion)
+  assets/brand/      MJ signet and lockup SVGs
+  assets/media/      Atmosphere stills (velvet fold, projector beam), optimised at build time
+  assets/work/       Real project screenshots (desktop + mobile)
+  components/ui/     Preloader, Nav, StickyCta, Atmosphere (film grain)
+  components/sections/ Hero, Proof, Manifesto, Work, Pins, Services, About, Contact, Footer
+  components/form/   FormField, SubmitButton
+  lib/               site.ts (facts, links), content.ts (all copy), async-form.ts
+  lib/motion/        One module per scene (preloader, hero, scenes, showcase, magnetic, dust)
+  scripts/main.ts    Boots smooth scroll, the intro and every scene in order
+  styles/global.css  Design tokens (@theme), fonts, base layer, shared components
+design/              Logo sources, moodboard, Higgsfield prompts and source renders
 ```
+
+Every animation lives behind `gsap.matchMedia()`: full choreography on desktop,
+a lighter version under 1024px, and a calm static page with
+`prefers-reduced-motion`.
 
 ## Forms
 
-Both the contact and audit forms submit to a single
-[Formspree](https://formspree.io) endpoint (`FORMSPREE_ENDPOINT` in
-`src/lib/site.ts`). A hidden `_subject` field distinguishes them in the inbox,
-and a `_gotcha` honeypot filters basic spam. On failure, each form shows a
-fallback `mailto:` prompt. No server of our own is required.
+The contact form posts to [Formspree](https://formspree.io) (`FORM_ENDPOINT` in
+`src/lib/site.ts`). A hidden `_subject` labels it in the inbox and a `_gotcha`
+honeypot filters basic spam. On failure it shows an error with the email
+address as a fallback. No server of our own is required.
 
 ## Deploy to Cloudflare Pages
 
@@ -74,8 +81,14 @@ npx wrangler pages deploy dist --project-name=madebyjustas
 ### Notes
 
 - `public/_headers` sets long-lived immutable caching for `/_astro/*` assets and
-  baseline security headers. Cloudflare Pages applies it automatically.
+  baseline security headers. Cloudflare applies it automatically.
+- `public/_redirects` sends the old pages (`/work`, `/work/*`, `/services`,
+  `/about`, `/contact`, `/audits`) to the matching section of the homepage with
+  a 301, so old links never 404.
 - The production domain is `madebyjustas.dev` (set in `astro.config.mjs` as
   `site`). Add it as a custom domain in the Pages project and keep the two in
   sync so canonical URLs, `sitemap-index.xml`, and Open Graph tags stay correct.
+
+```
+
 ```

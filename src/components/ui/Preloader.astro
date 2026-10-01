@@ -1,0 +1,110 @@
+---
+import { getImage } from 'astro:assets';
+import Logo from '../Logo.astro';
+import beamImage from '../../assets/media/beam-16x9.webp';
+import { SITE } from '../../lib/site';
+
+const beam = await getImage({ src: beamImage, width: 1600, format: 'webp', quality: 70 });
+---
+
+<div class="preloader" data-preloader aria-hidden="true">
+	<img
+		class="preloader-beam"
+		data-pl-beam
+		src={beam.src}
+		alt=""
+		width={beam.attributes.width}
+		height={beam.attributes.height}
+	/>
+	<div class="preloader-center">
+		<div class="preloader-mark" data-pl-mark>
+			<Logo variant="signet" class="h-full w-auto" />
+		</div>
+		<p class="label preloader-caption" data-pl-caption>{SITE.author} · Web developer</p>
+		<span class="preloader-track"><span class="preloader-line" data-pl-line></span></span>
+	</div>
+</div>
+
+<script is:inline>
+	(function () {
+		const root = document.documentElement;
+		root.classList.add('is-loading');
+		// Failsafe: if the intro script never starts, the curtain must not stay down.
+		setTimeout(function () {
+			if (!root.classList.contains('is-loading') || root.dataset.intro === 'running') return;
+			root.classList.remove('is-loading');
+			const curtain = document.querySelector('[data-preloader]');
+			if (curtain) curtain.remove();
+		}, 10000);
+	})();
+</script>
+
+<style>
+	.preloader {
+		display: none;
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		place-items: center;
+		background-color: var(--color-ink);
+		clip-path: inset(0% 0% 0% 0%);
+		overflow: hidden;
+	}
+
+	:global(html.js) .preloader {
+		display: grid;
+	}
+
+	.preloader-beam {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: left top;
+		mix-blend-mode: screen;
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.preloader-center {
+		position: relative;
+		display: grid;
+		justify-items: center;
+		gap: 1.5rem;
+	}
+
+	.preloader-mark {
+		height: clamp(4.5rem, 10vw, 6.5rem);
+		color: var(--color-bone);
+	}
+
+	.preloader-track {
+		position: relative;
+		width: 8rem;
+		height: 1px;
+		background-color: var(--hairline);
+		overflow: hidden;
+	}
+
+	.preloader-line {
+		position: absolute;
+		inset: 0;
+		background-color: var(--color-red);
+		transform: scaleX(0);
+		transform-origin: left center;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.preloader-mark,
+		.preloader-caption {
+			visibility: hidden;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.preloader-track {
+			display: none;
+		}
+	}
+</style>

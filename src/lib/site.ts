@@ -1,11 +1,15 @@
 export const SITE = {
-	name: 'madebyjustas.dev',
+	name: 'Made by Justas',
+	domain: 'madebyjustas.dev',
 	url: 'https://madebyjustas.dev',
 	author: 'Justas Aksamitauskas',
+	jobTitle: 'Independent web developer',
 	email: 'info@madebyjustas.dev',
 	linkedin: 'https://www.linkedin.com/in/justas-aksamitauskas-196133279/',
-	defaultDescription: 'Fast, AI-optimized websites for service businesses.',
-	defaultOgImage: '/og-default.jpg',
+	title: 'Justas Aksamitauskas · I can make your Pinterest dreams come true',
+	description:
+		'Saved a website you love on Pinterest? I design and hand-code it for your business in 1–2 weeks: fast, beautiful, and built to be found on Google and in ChatGPT.',
+	ogImage: '/og.jpg',
 } as const;
 
 export interface NavLink {
@@ -14,17 +18,10 @@ export interface NavLink {
 }
 
 export const NAV_LINKS: NavLink[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Work', href: '/work' },
-	{ label: 'Services', href: '/services' },
-	{ label: 'About', href: '/about' },
-	{ label: 'Contact', href: '/contact' },
-	{ label: 'Audits', href: '/audits' },
+	{ label: 'Work', href: '#work' },
+	{ label: 'Services', href: '#services' },
+	{ label: 'About', href: '#about' },
 ];
 
-// Forms submit to Formspree (https://formspree.io). The same project endpoint
-// handles both the contact and audit forms; a hidden `_subject`/`formType`
-// field distinguishes them in the inbox. No backend of our own to maintain.
-export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqevyble';
-export const CONTACT_FORM_ENDPOINT = FORMSPREE_ENDPOINT;
-export const AUDIT_FORM_ENDPOINT = FORMSPREE_ENDPOINT;
+// Formspree handles the contact form; no backend of our own to maintain.
+export const FORM_ENDPOINT = 'https://formspree.io/f/mbdqzggq';

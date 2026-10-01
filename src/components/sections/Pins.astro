@@ -1,0 +1,219 @@
+---
+import { PINS, PINS_INTRO, PIN_STEPS } from '../../lib/content';
+---
+
+<section id="pinterest" class="pins" data-pins aria-labelledby="pins-title">
+	<div class="container-page pins-grid">
+		<div class="pins-copy">
+			<p class="label" data-reveal>{PINS_INTRO.eyebrow}</p>
+			<h2 id="pins-title" class="pins-title" data-reveal>{PINS_INTRO.title}</h2>
+			<p class="pins-lead" data-reveal>{PINS_INTRO.lead}</p>
+			<p class="pins-body" data-reveal>{PINS_INTRO.body}</p>
+			<ol class="pins-steps" data-reveal-group>
+				{
+					PIN_STEPS.map((step) => (
+						<li class="pins-step">
+							<span class="pins-step-number" aria-hidden="true">
+								{step.number}
+							</span>
+							<div>
+								<h3 class="pins-step-name">{step.name}</h3>
+								<p class="pins-step-body">{step.body}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+			<p data-reveal>
+				<a
+					href="#contact"
+					class="btn btn-primary"
+					data-magnetic
+					data-project-type="Build what I found on Pinterest"
+				>
+					{PINS_INTRO.cta}
+					<span class="btn-arrow" aria-hidden="true">→</span>
+				</a>
+			</p>
+		</div>
+
+		<div class="pins-board" aria-label="The kinds of sites people pin" role="list">
+			{
+				PINS.map((pin, i) => (
+					<article class="pin" data-pin style={`--i: ${i}`} role="listitem">
+						<span class="pin-tack" aria-hidden="true" />
+						<p class="pin-title">{pin.title}</p>
+						<p class="pin-note">{pin.note}</p>
+						<p class="pin-meta" aria-hidden="true">
+							Saved · I can build this
+						</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.pins {
+		position: relative;
+		padding-block: var(--section-y);
+		overflow: hidden;
+		background:
+			radial-gradient(
+				ellipse 55% 60% at 80% 50%,
+				color-mix(in oklab, var(--color-amaranth) 40%, transparent),
+				transparent 70%
+			),
+			var(--color-ink);
+	}
+
+	.pins-grid {
+		display: grid;
+		gap: 4rem;
+	}
+
+	.pins-title {
+		margin-top: 1rem;
+		max-width: 12ch;
+		font-size: var(--text-5xl);
+		line-height: var(--text-5xl--line-height);
+	}
+
+	.pins-lead {
+		margin-top: 1.5rem;
+		max-width: 32rem;
+		font-size: var(--text-lg);
+		line-height: var(--text-lg--line-height);
+	}
+
+	.pins-body {
+		margin-top: 1rem;
+		max-width: 32rem;
+		color: var(--color-bone-muted);
+	}
+
+	.pins-steps {
+		display: grid;
+		gap: 1.25rem;
+		margin-block: 2.5rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.pins-step {
+		display: grid;
+		grid-template-columns: 2.5rem 1fr;
+		gap: 0.75rem;
+	}
+
+	.pins-step-number {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: var(--tracking-label);
+		color: var(--color-red-light);
+		padding-top: 0.3em;
+	}
+
+	.pins-step-name {
+		font-size: var(--text-lg);
+	}
+
+	.pins-step-body {
+		margin-top: 0.25rem;
+		font-size: var(--text-sm);
+		color: var(--color-bone-muted);
+	}
+
+	/* ---- The board: six "pins" fanned out like a mood board. ---- */
+	.pins-board {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+		align-content: start;
+	}
+
+	.pin {
+		position: relative;
+		display: grid;
+		gap: 0.4rem;
+		padding: 1.25rem 1.25rem 1.1rem;
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-md);
+		background: linear-gradient(
+			160deg,
+			color-mix(in oklab, var(--color-amaranth) 28%, var(--color-carbon)),
+			var(--color-carbon) 65%
+		);
+		box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.8);
+		will-change: transform;
+	}
+
+	.pin:nth-child(odd) {
+		background: linear-gradient(
+			160deg,
+			color-mix(in oklab, var(--color-rouge) 36%, var(--color-carbon)),
+			var(--color-carbon) 65%
+		);
+	}
+
+	.pin-tack {
+		position: absolute;
+		top: 0.7rem;
+		right: 0.8rem;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: var(--radius-full);
+		background-color: var(--color-red);
+		box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-red) 30%, transparent);
+	}
+
+	.pin-title {
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-xl);
+		line-height: var(--text-xl--line-height);
+		padding-right: 1.25rem;
+	}
+
+	.pin-note {
+		font-size: var(--text-sm);
+		color: var(--color-bone-muted);
+	}
+
+	.pin-meta {
+		margin-top: 0.5rem;
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+		color: var(--color-red-light);
+	}
+
+	@media (min-width: 1024px) {
+		.pins-grid {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			gap: clamp(3rem, 6vw, 7rem);
+			align-items: center;
+		}
+
+		.pins-board {
+			gap: 1rem;
+			transform-style: preserve-3d;
+			perspective: 1200px;
+		}
+
+		.pin {
+			min-height: 12rem;
+			padding: 1.75rem 1.5rem 1.5rem;
+		}
+
+		/* Stagger the two columns like a real board (GSAP owns transform). */
+		.pin:nth-child(even) {
+			margin-top: 2rem;
+		}
+	}
+</style>

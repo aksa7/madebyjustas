@@ -1,0 +1,105 @@
+---
+import { PROOF_POINTS } from '../../lib/content';
+
+const lists = [false, true];
+---
+
+<section class="proof" aria-labelledby="proof-title">
+	<h2 id="proof-title" class="sr-only">At a glance</h2>
+	<div class="proof-track">
+		{
+			lists.map((duplicate) => (
+				<ul class="proof-list" aria-hidden={duplicate ? 'true' : undefined}>
+					{PROOF_POINTS.map((point) => (
+						<li class="proof-item">
+							<span class="proof-mark" aria-hidden="true" />
+							{point}
+						</li>
+					))}
+				</ul>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.proof {
+		position: relative;
+		padding-block: clamp(2.5rem, 6vw, 4.5rem);
+		border-block: 1px solid var(--hairline);
+		overflow: hidden;
+		mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+	}
+
+	.proof-track {
+		display: flex;
+		width: max-content;
+		animation: marquee 48s linear infinite;
+	}
+
+	.proof:hover .proof-track {
+		animation-play-state: paused;
+	}
+
+	.proof-list {
+		display: flex;
+		flex-shrink: 0;
+	}
+
+	.proof-item {
+		display: flex;
+		align-items: center;
+		gap: clamp(1.5rem, 3vw, 2.75rem);
+		padding-right: clamp(1.5rem, 3vw, 2.75rem);
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-3xl);
+		line-height: 1.2;
+		white-space: nowrap;
+		color: var(--color-bone-muted);
+	}
+
+	.proof-mark {
+		width: 0.4rem;
+		height: 0.4rem;
+		background-color: var(--color-red-light);
+		transform: rotate(45deg);
+	}
+
+	@keyframes marquee {
+		to {
+			transform: translate3d(-50%, 0, 0);
+		}
+	}
+
+	/* Without motion it becomes a calm, wrapped list. */
+	@media (prefers-reduced-motion: reduce) {
+		.proof {
+			mask-image: none;
+		}
+
+		.proof-track {
+			width: auto;
+			padding-inline: var(--gutter);
+			animation: none;
+		}
+
+		.proof-list {
+			flex-wrap: wrap;
+			justify-content: center;
+			row-gap: 1rem;
+			flex-shrink: 1;
+		}
+
+		.proof-list[aria-hidden] {
+			display: none;
+		}
+
+		.proof-item {
+			font-size: var(--text-xl);
+			white-space: normal;
+		}
+	}
+</style>

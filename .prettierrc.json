@@ -10,5 +10,6 @@
 				"parser": "astro"
 			}
 		}
-	]
+	],
+	"tailwindStylesheet": "./src/styles/global.css"
 }

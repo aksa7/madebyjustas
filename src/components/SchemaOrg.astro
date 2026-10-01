@@ -1,11 +1,10 @@
 ---
 import { SITE } from '../lib/site';
+import { SERVICES } from '../lib/content';
 
 const personId = `${SITE.url}/#person`;
-const organizationId = `${SITE.url}/#organization`;
+const businessId = `${SITE.url}/#business`;
 const websiteId = `${SITE.url}/#website`;
-
-const ogImageURL = new URL(SITE.defaultOgImage, SITE.url).toString();
 
 const schema = {
 	'@context': 'https://schema.org',
@@ -15,45 +14,47 @@ const schema = {
 			'@id': websiteId,
 			name: SITE.name,
 			url: SITE.url,
-			description: SITE.defaultDescription,
-			inLanguage: 'en-US',
-			publisher: { '@id': organizationId },
+			description: SITE.description,
+			inLanguage: 'en',
+			publisher: { '@id': businessId },
 		},
 		{
 			'@type': 'Person',
 			'@id': personId,
 			name: SITE.author,
 			url: SITE.url,
-			email: SITE.email,
-			jobTitle: 'Web Developer',
+			email: `mailto:${SITE.email}`,
+			jobTitle: SITE.jobTitle,
 			description:
-				'Independent web developer building fast, AI-optimized websites for service businesses.',
+				'Independent web developer with a software engineering background. Designs and hand-codes fast websites for service businesses.',
 			knowsAbout: [
+				'Web design',
 				'Web development',
-				'Astro',
-				'Search engine optimization (SEO)',
-				'Generative engine optimization (GEO)',
+				'Search engine optimization',
+				'Generative engine optimization',
 				'Web performance',
 			],
 			sameAs: [SITE.linkedin],
 		},
 		{
 			'@type': 'ProfessionalService',
-			'@id': organizationId,
+			'@id': businessId,
 			name: SITE.name,
 			url: SITE.url,
 			email: SITE.email,
-			image: ogImageURL,
-			description:
-				'Fast, AI-optimized websites for service businesses. New builds, audits, and maintenance with SEO and GEO baked in from day one.',
+			image: new URL(SITE.ogImage, SITE.url).toString(),
+			description: SITE.description,
 			founder: { '@id': personId },
 			areaServed: 'Worldwide',
-			serviceType: [
-				'Website design and development',
-				'Website audit and optimization',
-				'SEO and GEO optimization',
-				'Website maintenance',
-			],
+			knowsLanguage: ['en', 'lt'],
+			hasOfferCatalog: {
+				'@type': 'OfferCatalog',
+				name: 'Website services',
+				itemListElement: SERVICES.map((service) => ({
+					'@type': 'Offer',
+					itemOffered: { '@type': 'Service', name: service.name, description: service.lead },
+				})),
+			},
 			sameAs: [SITE.linkedin],
 		},
 	],

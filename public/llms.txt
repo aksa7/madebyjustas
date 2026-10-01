@@ -1,39 +1,30 @@
 # madebyjustas.dev
 
-> Independent web developer building fast, AI-optimized websites for service businesses. No agency overhead — direct communication, clear scope. 53+ websites shipped. Sub-1s load times. GEO + SEO baked in from day one.
+> "I can make your Pinterest dreams come true." Justas Aksamitauskas is an independent web developer with a software engineering background. He designs and hand-codes fast, beautiful websites for service businesses (med spas, aesthetics, legal, hospitality, wellness) and makes sure they get found on Google and in AI search tools like ChatGPT and Perplexity. 64+ websites shipped.
 
-## About
+The whole site is a single page: https://madebyjustas.dev/
 
-- [Home](https://madebyjustas.dev/): Positioning, proof points, process overview, and recent work.
-- [About](https://madebyjustas.dev/about/): Background, approach, and how projects are run.
-- [Services](https://madebyjustas.dev/services/): New Build, Audit & Optimize, and Maintenance — with FAQ.
-- [Work](https://madebyjustas.dev/work/): Portfolio and case studies with before/after performance context.
-- [Contact](https://madebyjustas.dev/contact/): Start a project or ask a question.
-- [Audits](https://madebyjustas.dev/audits/): Free public audit series for service business websites.
+## Sections
+
+- [Work](https://madebyjustas.dev/#work): Six recent projects with live links: Aksendo (artist editorial site), 21-Day Reset (CRO landing), Decks&Stories (global music platform), Tvorteka (fence and gate maker), Blumu (app marketing site), Elesen Show 2026 (event microsite).
+- [Pinterest](https://madebyjustas.dev/#pinterest): Send the pins you love and Justas builds a site in that spirit, made for your business, in 1–2 weeks.
+- [Services](https://madebyjustas.dev/#services): New Build, Audit & Optimize, Maintenance, plus FAQ.
+- [About](https://madebyjustas.dev/#about): Who Justas is and how he works.
+- [Contact](https://madebyjustas.dev/#contact): Project enquiry form, including a free website audit.
 
 ## Services
 
-- **New Build** — Discovery, custom design system, hand-coded build tailored to the project, schema + GEO foundations, Cloudflare deploy. 4–6 weeks.
-- **Audit & Optimize** — 5-dimension audit (speed, SEO, GEO, UX, trust), prioritized action list, speed and schema fixes. 2–3 weeks.
-- **Maintenance** — Monthly performance + GEO citation report, content/build updates, priority response.
+- **New Build**: Discovery call, a design system for the brand, a hand-coded fast build, schema and AI-search foundations, two rounds of revisions, 30 days of support. Usually 1–2 weeks.
+- **Audit & Optimize**: Five-part audit (speed, SEO, AI search, UX, trust), a prioritised action list, speed and structured-data fixes. A week at most.
+- **Maintenance**: Monthly performance and AI-search report, up to 8 hours of updates a month, priority replies.
 
-Pricing: quote after a short discovery call.
+Pricing: a fixed quote after a short discovery call.
 
-## Process
+## How it works
 
-1. **Audit** — Speed, SEO, GEO, UX, trust.
-2. **Build** — Clean, hand-coded code tailored to the project; deployed on Cloudflare Pages with global CDN.
-3. **Rank** — Schema markup, FAQ structure, local SEO from day one.
-
-## Case studies
-
-- [Blumu Web](https://madebyjustas.dev/work/blumu/): Conversion-focused marketing site for a local-services marketplace app.
-- [Blumu App](https://madebyjustas.dev/work/blumu-app/): React Native marketplace app with NestJS backend, Stripe subscriptions, and real-time messaging.
-- [Tvorteka](https://madebyjustas.dev/work/tvorteka/): Multi-page manufacturer site with product catalogue, price calculator, and local SEO.
-- [Renginių LAB](https://madebyjustas.dev/work/renginiu-lab/): Event venue site with occasion-based structure and deep FAQ for Google and AI search.
-- [inSpotlight](https://madebyjustas.dev/work/events-agency/): Agency portfolio with cinematic video hero.
-- [Decks&Stories](https://madebyjustas.dev/work/decks-and-stories/): Global music platform with custom audio player and scalable content architecture.
-- [Work index](https://madebyjustas.dev/work/): Full portfolio.
+1. Send your pins or a few sites you like.
+2. Justas designs and hand-codes the site, served from Cloudflare's global edge network.
+3. It launches in 1–2 weeks with structured data, a real FAQ and local SEO from day one.
 
 ## Contact
 

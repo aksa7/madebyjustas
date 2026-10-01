@@ -1,0 +1,233 @@
+---
+import FormField from '../form/FormField.astro';
+import SubmitButton from '../form/SubmitButton.astro';
+import { CONTACT, FREE_AUDIT_NOTE, PROJECT_TYPES } from '../../lib/content';
+import { FORM_ENDPOINT, SITE } from '../../lib/site';
+---
+
+<section id="contact" class="contact" data-theme="light" aria-labelledby="contact-title">
+	<div class="container-page contact-grid">
+		<div class="contact-intro" data-reveal>
+			<h2 id="contact-title" class="contact-title">{CONTACT.title}</h2>
+			<p class="contact-lead">{CONTACT.lead}</p>
+			<p class="contact-note">{FREE_AUDIT_NOTE}</p>
+			<p class="contact-note">{CONTACT.ps}</p>
+			<div class="contact-direct">
+				<p class="contact-direct-label">Prefer email?</p>
+				<a href={`mailto:${SITE.email}`} class="link-underline contact-email">{SITE.email}</a>
+			</div>
+		</div>
+
+		<div class="contact-form-wrap" data-reveal>
+			<form
+				class="contact-form"
+				action={FORM_ENDPOINT}
+				method="POST"
+				data-contact-form
+				aria-labelledby="contact-title"
+			>
+				<input type="hidden" name="_subject" value="New project enquiry from madebyjustas.dev" />
+				<div class="contact-trap" aria-hidden="true">
+					<label for="contact-gotcha">Leave this empty</label>
+					<input id="contact-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+				</div>
+
+				<div class="contact-row">
+					<FormField id="contact-name" label="Your name">
+						<input
+							id="contact-name"
+							name="name"
+							type="text"
+							autocomplete="name"
+							required
+							minlength="2"
+							aria-describedby="contact-name-error"
+						/>
+					</FormField>
+					<FormField id="contact-email" label="Email">
+						<input
+							id="contact-email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							inputmode="email"
+							required
+							aria-describedby="contact-email-error"
+						/>
+					</FormField>
+				</div>
+
+				<FormField id="contact-type" label="What can I help with?">
+					<select
+						id="contact-type"
+						name="project_type"
+						required
+						aria-describedby="contact-type-error"
+					>
+						<option value="" disabled selected>Choose one</option>
+						{PROJECT_TYPES.map((type) => <option value={type}>{type}</option>)}
+					</select>
+				</FormField>
+
+				<FormField id="contact-message" label="Your project">
+					<textarea
+						id="contact-message"
+						name="message"
+						rows="5"
+						required
+						minlength="10"
+						placeholder="A little about your business, your current site (if you have one), and what you'd love it to do."
+						aria-describedby="contact-message-error"></textarea>
+				</FormField>
+
+				<div class="contact-submit">
+					<SubmitButton label="Send my message" />
+					<p class="contact-privacy">
+						I only use your details to reply to you. No newsletters, promise.
+					</p>
+				</div>
+			</form>
+			<p class="contact-form-status" data-form-status role="status" aria-live="polite"></p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact {
+		padding-block: clamp(3rem, 6vw, 5rem) var(--section-y);
+		background-color: var(--color-bone);
+		color: var(--color-rouge);
+	}
+
+	.contact-grid {
+		display: grid;
+		gap: 3.5rem;
+	}
+
+	.contact-title {
+		max-width: 11ch;
+		font-size: var(--text-5xl);
+		line-height: var(--text-5xl--line-height);
+	}
+
+	.contact-lead {
+		margin-top: 1.5rem;
+		max-width: 30rem;
+		font-size: var(--text-lg);
+		line-height: var(--text-lg--line-height);
+	}
+
+	.contact-note {
+		margin-top: 1rem;
+		max-width: 30rem;
+		color: color-mix(in oklab, var(--color-rouge) 75%, var(--color-bone));
+	}
+
+	.contact-direct {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in oklab, var(--color-rouge) 20%, transparent);
+	}
+
+	.contact-direct-label {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+		color: var(--color-red-deep);
+	}
+
+	.contact-email {
+		display: inline-block;
+		margin-top: 0.5rem;
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-2xl);
+		overflow-wrap: anywhere;
+	}
+
+	.contact-form {
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.contact-row {
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.contact-trap {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.contact-submit {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem 1.5rem;
+		margin-top: 0.5rem;
+	}
+
+	.contact-privacy {
+		font-size: var(--text-sm);
+		color: color-mix(in oklab, var(--color-rouge) 70%, var(--color-bone));
+	}
+
+	.contact-form-status {
+		font-size: var(--text-lg);
+	}
+
+	.contact-form-status:empty {
+		display: none;
+	}
+
+	.contact-form-status[data-state='success'] {
+		padding: 2rem;
+		border: 1px solid color-mix(in oklab, var(--color-rouge) 25%, transparent);
+		border-radius: var(--radius-lg);
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-2xl);
+	}
+
+	.contact-form-status[data-state='error'] {
+		margin-top: 1.5rem;
+		color: var(--color-amaranth);
+	}
+
+	@media (min-width: 640px) {
+		.contact-row {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.contact-grid {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+			gap: clamp(3rem, 7vw, 7rem);
+		}
+	}
+</style>
+
+<script>
+	import { initAsyncForm } from '../../lib/async-form';
+	import { CONTACT } from '../../lib/content';
+	import { FORM_ENDPOINT, SITE } from '../../lib/site';
+
+	const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+	const status = document.querySelector<HTMLElement>('[data-form-status]');
+	if (form && status) {
+		initAsyncForm(form, status, FORM_ENDPOINT, {
+			success: CONTACT.success,
+			error: `Something went wrong on my side. Please try again, or email me at ${SITE.email}.`,
+		});
+	}
+</script>

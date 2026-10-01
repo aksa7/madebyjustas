@@ -1,0 +1,87 @@
+---
+import Logo from '../Logo.astro';
+import { SITE } from '../../lib/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer" data-theme="light">
+	<div class="container-page footer-inner">
+		<a href="#top" class="footer-logo" aria-label={`${SITE.name}, back to top`}>
+			<Logo variant="lockup" class="h-full w-auto" />
+		</a>
+		<ul class="footer-links">
+			<li>
+				<a href={`mailto:${SITE.email}`} class="footer-link">{SITE.email}</a>
+			</li>
+			<li>
+				<a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" class="footer-link">
+					LinkedIn <span aria-hidden="true">↗</span><span class="sr-only">
+						(opens in a new tab)</span
+					>
+				</a>
+			</li>
+		</ul>
+		<p class="footer-copy">Hand-coded with care · © {year} {SITE.author}</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background-color: var(--color-bone);
+		color: var(--color-rouge);
+	}
+
+	.footer-inner {
+		display: grid;
+		gap: 1.5rem;
+		padding-block: 2.5rem calc(2.5rem + env(safe-area-inset-bottom));
+		border-top: 1px solid color-mix(in oklab, var(--color-rouge) 20%, transparent);
+	}
+
+	.footer-logo {
+		display: flex;
+		align-items: center;
+		width: fit-content;
+		height: 1rem;
+		min-height: var(--tap);
+		padding-block: calc((var(--tap) - 1rem) / 2);
+	}
+
+	.footer-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 2rem;
+	}
+
+	.footer-link {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap);
+		font-size: var(--text-sm);
+		transition: color var(--dur-base) var(--ease-cinema);
+	}
+
+	.footer-link:hover {
+		color: var(--color-amaranth);
+	}
+
+	.footer-copy {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: 0.08em;
+		color: color-mix(in oklab, var(--color-rouge) 70%, var(--color-bone));
+	}
+
+	@media (min-width: 768px) {
+		.footer-inner {
+			grid-template-columns: auto 1fr auto;
+			align-items: center;
+			gap: 3rem;
+		}
+
+		.footer-links {
+			justify-content: center;
+		}
+	}
+</style>

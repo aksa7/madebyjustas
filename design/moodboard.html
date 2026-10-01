@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Velvet Noir moodboard</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Hanken+Grotesk:wght@300..600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--ink: #0f0e0e;
+				--carbon: #1a1919;
+				--oxblood: #5b0d18;
+				--amaranth: #6e1e3b;
+				--cognac: #8a4e2a;
+				--cognac-light: #c4925f;
+				--bone: #e8dfd0;
+				--bone-muted: #a79e92;
+				--display: 'Bodoni Moda', serif;
+				--sans: 'Hanken Grotesk', sans-serif;
+				--mono: 'IBM Plex Mono', monospace;
+			}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background: var(--ink);
+				color: var(--bone);
+				font-family: var(--sans);
+				width: 1440px;
+			}
+			.label {
+				font-family: var(--mono);
+				font-size: 11px;
+				letter-spacing: 0.22em;
+				text-transform: uppercase;
+				color: var(--cognac-light);
+			}
+			section {
+				position: relative;
+				overflow: hidden;
+			}
+
+			/* 1 — hero mock */
+			.hero {
+				height: 900px;
+				padding: 56px 88px;
+				background: var(--ink);
+			}
+			.hero .light {
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(
+						60% 70% at 78% 62%,
+						rgba(110, 30, 59, 0.85) 0%,
+						rgba(91, 13, 24, 0.55) 32%,
+						transparent 68%
+					),
+					radial-gradient(22% 30% at 80% 52%, rgba(232, 223, 208, 0.18) 0%, transparent 70%),
+					linear-gradient(115deg, transparent 52%, rgba(232, 223, 208, 0.05) 60%, transparent 66%);
+			}
+			.hero .grain {
+				position: absolute;
+				inset: 0;
+				opacity: 0.09;
+				mix-blend-mode: overlay;
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+			}
+			.hero .vignette {
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
+			}
+			.nav {
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.wordmark-sm {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 40;
+				font-weight: 500;
+				font-size: 15px;
+				letter-spacing: 0.32em;
+			}
+			.nav .links {
+				display: flex;
+				gap: 40px;
+				font-size: 13px;
+				color: var(--bone-muted);
+			}
+			.hero-copy {
+				position: relative;
+				margin-top: 170px;
+				max-width: 760px;
+			}
+			.hero h1 {
+				margin-top: 28px;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-weight: 400;
+				font-size: 86px;
+				line-height: 1.02;
+				letter-spacing: -0.015em;
+			}
+			.hero p {
+				margin-top: 32px;
+				max-width: 520px;
+				font-size: 19px;
+				line-height: 1.6;
+				color: var(--bone-muted);
+				font-weight: 300;
+			}
+			.cta {
+				display: inline-flex;
+				align-items: center;
+				gap: 14px;
+				margin-top: 44px;
+				padding: 17px 30px;
+				border-radius: 999px;
+				background: var(--bone);
+				color: var(--ink);
+				font-size: 15px;
+				font-weight: 500;
+			}
+			.cta span {
+				display: inline-block;
+				width: 7px;
+				height: 7px;
+				border-radius: 50%;
+				background: var(--amaranth);
+			}
+			.cta-ghost {
+				margin-left: 22px;
+				font-size: 15px;
+				color: var(--bone);
+				border-bottom: 1px solid rgba(232, 223, 208, 0.35);
+				padding-bottom: 3px;
+			}
+			.hero .note {
+				position: absolute;
+				right: 88px;
+				bottom: 56px;
+				text-align: right;
+			}
+			.hero .note .label {
+				color: var(--bone-muted);
+			}
+
+			/* 2 — palette */
+			.palette {
+				padding: 96px 88px;
+				background: var(--carbon);
+			}
+			.palette h2,
+			.type h2,
+			.logo h2 {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 72;
+				font-weight: 400;
+				font-size: 48px;
+				margin-top: 18px;
+			}
+			.swatches {
+				display: grid;
+				grid-template-columns: repeat(7, 1fr);
+				gap: 14px;
+				margin-top: 48px;
+			}
+			.sw {
+				border-radius: 6px;
+				overflow: hidden;
+				border: 1px solid rgba(232, 223, 208, 0.1);
+			}
+			.sw .chip {
+				height: 190px;
+			}
+			.sw .meta {
+				padding: 14px;
+				background: var(--ink);
+			}
+			.sw .name {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 30;
+				font-size: 19px;
+			}
+			.sw .hex {
+				margin-top: 6px;
+				font-family: var(--mono);
+				font-size: 11px;
+				color: var(--bone-muted);
+			}
+			.sw .role {
+				margin-top: 8px;
+				font-size: 12px;
+				color: var(--bone-muted);
+				line-height: 1.45;
+			}
+			.fade {
+				margin-top: 56px;
+				height: 110px;
+				border-radius: 6px;
+				background: linear-gradient(
+					90deg,
+					var(--ink) 0%,
+					var(--carbon) 18%,
+					var(--oxblood) 40%,
+					var(--amaranth) 55%,
+					#a8707f 72%,
+					var(--bone) 100%
+				);
+			}
+			.fade-cap {
+				display: flex;
+				justify-content: space-between;
+				margin-top: 14px;
+			}
+
+			/* 3 — type */
+			.type {
+				padding: 96px 88px;
+				background: var(--ink);
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 72px;
+			}
+			.spec {
+				border-top: 1px solid rgba(232, 223, 208, 0.12);
+				padding-top: 22px;
+				margin-top: 32px;
+			}
+			.spec .big {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-size: 120px;
+				line-height: 1;
+				margin-top: 14px;
+			}
+			.spec .body {
+				font-size: 18px;
+				line-height: 1.65;
+				color: var(--bone-muted);
+				font-weight: 300;
+				margin-top: 14px;
+				max-width: 520px;
+			}
+			.spec .mono {
+				font-family: var(--mono);
+				font-size: 13px;
+				letter-spacing: 0.2em;
+				text-transform: uppercase;
+				color: var(--cognac-light);
+				margin-top: 14px;
+			}
+
+			/* 4 — logo */
+			.logo {
+				padding: 96px 88px;
+				background: var(--carbon);
+			}
+			.logos {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 18px;
+				margin-top: 48px;
+			}
+			.lg {
+				height: 360px;
+				border-radius: 6px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding: 22px;
+				background: var(--ink);
+				border: 1px solid rgba(232, 223, 208, 0.08);
+			}
+			.lg.bone {
+				background: var(--bone);
+				color: var(--oxblood);
+			}
+			.lg.bone .label {
+				color: var(--cognac);
+			}
+			.lg .mark {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.signet {
+				position: relative;
+				width: 150px;
+				height: 150px;
+			}
+			.signet .m {
+				position: absolute;
+				left: 0;
+				top: 0;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-weight: 400;
+				font-size: 132px;
+				line-height: 1;
+			}
+			.signet .j {
+				position: absolute;
+				left: 60px;
+				top: 40px;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-weight: 400;
+				font-size: 104px;
+				line-height: 1;
+			}
+			.signet .rule {
+				position: absolute;
+				left: -14px;
+				right: -14px;
+				top: 124px;
+				height: 1px;
+				background: currentColor;
+				opacity: 0.35;
+			}
+			.spaced {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 60;
+				font-weight: 500;
+				font-size: 30px;
+				letter-spacing: 0.34em;
+			}
+			.lockup {
+				display: flex;
+				align-items: center;
+				gap: 26px;
+			}
+			.lockup .div {
+				width: 1px;
+				height: 56px;
+				background: currentColor;
+				opacity: 0.3;
+			}
+			.lockup .small-signet {
+				position: relative;
+				width: 52px;
+				height: 56px;
+			}
+			.lockup .small-signet .m {
+				position: absolute;
+				left: 0;
+				top: 0;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-size: 48px;
+				line-height: 1;
+			}
+			.lockup .small-signet .j {
+				position: absolute;
+				left: 21px;
+				top: 14px;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-size: 38px;
+				line-height: 1;
+			}
+			.lockup .words {
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 60;
+				font-weight: 500;
+				font-size: 17px;
+				letter-spacing: 0.34em;
+			}
+
+			/* 5 — closing on bone */
+			.close {
+				padding: 110px 88px;
+				background: var(--bone);
+				color: var(--oxblood);
+			}
+			.close .label {
+				color: var(--cognac);
+			}
+			.close h2 {
+				margin-top: 22px;
+				font-family: var(--display);
+				font-variation-settings: 'opsz' 96;
+				font-weight: 400;
+				font-size: 76px;
+				line-height: 1.04;
+				max-width: 900px;
+			}
+			.close p {
+				margin-top: 26px;
+				font-size: 19px;
+				color: #4a3a36;
+				max-width: 560px;
+				line-height: 1.6;
+				font-weight: 300;
+			}
+			.close .cta {
+				background: var(--oxblood);
+				color: var(--bone);
+			}
+			.close .cta span {
+				background: var(--cognac-light);
+			}
+
+			.small-row {
+				display: flex;
+				align-items: center;
+				gap: 40px;
+				margin-top: 18px;
+				padding: 22px;
+				border-radius: 6px;
+				background: var(--ink);
+			}
+			.small-row svg,
+			.mark svg,
+			.wordmark-sm svg {
+				display: block;
+			}
+			.fav {
+				display: inline-flex;
+				width: 40px;
+				height: 40px;
+				border-radius: 9px;
+				background: var(--oxblood);
+				align-items: center;
+				justify-content: center;
+				color: var(--bone);
+			}
+		</style>
+	</head>
+	<body>
+		<section class="hero" id="hero">
+			<div class="light"></div>
+			<div class="vignette"></div>
+			<div class="grain"></div>
+			<div class="nav">
+				<div class="wordmark-sm" data-svg="logo-c-lockup.svg" data-h="30"></div>
+				<div class="links">
+					<span>Work</span><span>Process</span><span>Services</span><span>About</span
+					><span>Contact</span>
+				</div>
+			</div>
+			<div class="hero-copy">
+				<div class="label">Justas Aksamitauskas · Independent web developer</div>
+				<h1>Websites that load fast, look beautiful, and actually get found.</h1>
+				<p>
+					I design and hand-code sites for service businesses, built to show up on Google and in
+					tools like ChatGPT and Perplexity. It's just me, so you always talk to the person building
+					your site.
+				</p>
+				<div>
+					<a class="cta"><span></span>Let's talk about your project</a
+					><a class="cta-ghost">See the work</a>
+				</div>
+			</div>
+			<div class="note"><div class="label">Light here = velvet video (placeholder)</div></div>
+		</section>
+
+		<section class="palette" id="palette">
+			<div class="label">01 · Palette</div>
+			<h2>Velvet Noir</h2>
+			<div class="swatches">
+				<div class="sw">
+					<div class="chip" style="background: #0f0e0e"></div>
+					<div class="meta">
+						<div class="name">Ink</div>
+						<div class="hex">#0F0E0E</div>
+						<div class="role">Base. The dark room.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #1a1919"></div>
+					<div class="meta">
+						<div class="name">Carbon</div>
+						<div class="hex">#1A1919</div>
+						<div class="role">Surfaces, frames.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #5b0d18"></div>
+					<div class="meta">
+						<div class="name">Rouge Noir</div>
+						<div class="hex">#5B0D18</div>
+						<div class="role">Deep light, shadows of colour. Never text.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #6e1e3b"></div>
+					<div class="meta">
+						<div class="name">Amaranth</div>
+						<div class="hex">#6E1E3B</div>
+						<div class="role">Velvet glow, the one accent.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #8a4e2a"></div>
+					<div class="meta">
+						<div class="name">Cognac</div>
+						<div class="hex">#8A4E2A</div>
+						<div class="role">Hairlines, details on bone.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #c4925f"></div>
+					<div class="meta">
+						<div class="name">Cognac light</div>
+						<div class="hex">#C4925F</div>
+						<div class="role">Small labels. 7:1 on ink.</div>
+					</div>
+				</div>
+				<div class="sw">
+					<div class="chip" style="background: #e8dfd0"></div>
+					<div class="meta">
+						<div class="name">Bone</div>
+						<div class="hex">#E8DFD0</div>
+						<div class="role">Text 14.6:1. Daylight finale.</div>
+					</div>
+				</div>
+			</div>
+			<div class="fade"></div>
+			<div class="fade-cap">
+				<span class="label">Top of page · night</span
+				><span class="label">The page slowly warms as you scroll</span
+				><span class="label">Contact · daylight</span>
+			</div>
+		</section>
+
+		<section class="type" id="type">
+			<div>
+				<div class="label">02 · Typography</div>
+				<h2>Bodoni Moda, Hanken Grotesk, Plex Mono</h2>
+				<div class="spec">
+					<div class="label">Display · Bodoni Moda (opsz 96, regular)</div>
+					<div class="big">Aa Rr Jj</div>
+				</div>
+			</div>
+			<div>
+				<div class="spec">
+					<div class="label">Body · Hanken Grotesk light / regular</div>
+					<div class="body">
+						Speed isn't an add-on I sell you later. It's just how I build. You talk to the person
+						writing the code, from the first call to launch day.
+					</div>
+				</div>
+				<div class="spec">
+					<div class="label">Labels · IBM Plex Mono, small, sparing</div>
+					<div class="mono">Platform · Creative tech lead · 2025–2026</div>
+				</div>
+				<div class="spec">
+					<div class="label">Rules</div>
+					<div class="body">
+						No italics anywhere. Display only at 40px and up, where the hairlines stay crisp. Mono
+						only for tiny metadata, never for headlines.
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="logo" id="logo">
+			<div class="label">03 · New mark · vector outlines from Bodoni Moda</div>
+			<h2>Three directions</h2>
+			<div class="logos">
+				<div class="lg">
+					<div class="label">A · MJ ligature. The M's right leg becomes the J</div>
+					<div class="mark" data-svg="logo-a-signet.svg" data-h="190"></div>
+				</div>
+				<div class="lg">
+					<div class="label">B · Spaced wordmark</div>
+					<div class="mark" data-svg="logo-b-wordmark.svg" data-w="360"></div>
+				</div>
+				<div class="lg bone">
+					<div class="label">C · Lockup (recommended)</div>
+					<div class="mark" data-svg="logo-c-lockup.svg" data-w="380"></div>
+				</div>
+			</div>
+			<div class="small-row">
+				<span class="label">Favicon / small size cut</span
+				><span data-svg="logo-a-signet-small.svg" data-h="56"></span
+				><span data-svg="logo-a-signet-small.svg" data-h="32"></span
+				><span class="fav"><span data-svg="logo-a-signet-small.svg" data-h="22"></span></span>
+			</div>
+		</section>
+
+		<section class="close" id="close">
+			<div class="label">Finale on bone</div>
+			<h2>Accepting 2 new projects for Q3 2026.</h2>
+			<p>
+				Tell me what you're building. I read every message myself and usually reply within a day.
+			</p>
+			<a class="cta"><span></span>Let's talk about your project</a>
+		</section>
+		<script>
+			document.querySelectorAll('[data-svg]').forEach(async (el) => {
+				el.innerHTML = await (await fetch(el.dataset.svg)).text();
+				const svg = el.querySelector('svg');
+				if (el.dataset.h) svg.style.height = el.dataset.h + 'px';
+				if (el.dataset.w) svg.style.width = el.dataset.w + 'px';
+			});
+		</script>
+	</body>
+</html>

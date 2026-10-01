@@ -1,0 +1,304 @@
+---
+import { getImage } from 'astro:assets';
+import fold16x9 from '../../assets/media/fold-16x9.webp';
+import fold9x16 from '../../assets/media/fold-9x16.webp';
+import { HERO } from '../../lib/content';
+
+const wide = await getImage({
+	src: fold16x9,
+	widths: [1280, 1920, 2560],
+	format: 'webp',
+	quality: 72,
+});
+const tall = await getImage({
+	src: fold9x16,
+	widths: [640, 960, 1280],
+	format: 'webp',
+	quality: 70,
+});
+---
+
+<section id="top" class="hero" data-hero aria-labelledby="hero-title">
+	<div class="hero-stage">
+		<div class="hero-media" data-hero-media aria-hidden="true">
+			<div class="hero-media-inner" data-hero-media-inner>
+				<picture>
+					<source media="(min-width: 768px)" srcset={wide.srcSet.attribute} sizes="100vw" />
+					<img
+						class="hero-still"
+						data-preload-image
+						src={tall.src}
+						srcset={tall.srcSet.attribute}
+						sizes="100vw"
+						width={tall.attributes.width}
+						height={tall.attributes.height}
+						alt=""
+						fetchpriority="high"
+						decoding="async"
+					/>
+				</picture>
+				<video
+					class="hero-video"
+					data-hero-video
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="auto"
+					tabindex="-1"
+				>
+					<source
+						media="(min-width: 1280px) and (prefers-reduced-motion: no-preference)"
+						src="/media/fold-1080.mp4"
+						type="video/mp4"
+					/>
+					<source
+						media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+						src="/media/fold-720.mp4"
+						type="video/mp4"
+					/>
+				</video>
+			</div>
+		</div>
+		<div class="hero-shade" aria-hidden="true"></div>
+		<canvas class="hero-dust" data-dust aria-hidden="true"></canvas>
+		<div class="hero-dark" data-hero-dark aria-hidden="true"></div>
+
+		<div class="hero-copy container-page" data-hero-copy>
+			<p class="label" data-hero-reveal>{HERO.eyebrow}</p>
+			<h1 id="hero-title" class="hero-title" data-hero-title>{HERO.title}</h1>
+			<p class="hero-sub" data-hero-reveal>{HERO.lead}</p>
+			<div class="hero-actions" data-hero-reveal>
+				<a
+					href="#contact"
+					class="btn btn-primary"
+					data-magnetic
+					data-project-type="Build what I found on Pinterest"
+				>
+					{HERO.primaryCta}
+					<span class="btn-arrow" aria-hidden="true">→</span>
+				</a>
+				<a href="#work" class="btn btn-ghost">{HERO.secondaryCta}</a>
+			</div>
+		</div>
+
+		<div class="hero-cue" data-hero-cue aria-hidden="true">
+			<span class="label">Scroll</span>
+			<span class="hero-cue-line"></span>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		height: 240svh;
+		background-color: var(--color-ink);
+	}
+
+	.hero-stage {
+		position: sticky;
+		top: 0;
+		height: 100svh;
+		overflow: hidden;
+		display: grid;
+		align-items: end;
+	}
+
+	.hero-media {
+		position: absolute;
+		inset: 0;
+		/* The camera dives into the deepest fold of the velvet. */
+		transform-origin: 50% 58%;
+	}
+
+	.hero-media-inner {
+		position: absolute;
+		inset: 0;
+	}
+
+	.hero-still,
+	.hero-video {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.hero-video {
+		display: none;
+	}
+
+	/* A slow breath on phones, where the still stands in for the video. */
+	@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+		.hero-still {
+			animation: breathe 14s var(--ease-soft) infinite alternate;
+		}
+	}
+
+	@keyframes breathe {
+		to {
+			transform: scale(1.06) translate3d(0, -1.5%, 0);
+		}
+	}
+
+	.hero-shade {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(
+				to top,
+				var(--color-ink) 4%,
+				color-mix(in oklab, var(--color-ink) 70%, transparent) 45%,
+				transparent 75%
+			),
+			radial-gradient(
+				ellipse at 50% 40%,
+				transparent 40%,
+				color-mix(in oklab, var(--color-ink) 70%, transparent) 100%
+			);
+	}
+
+	.hero-dust {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		mix-blend-mode: screen;
+	}
+
+	.hero-dark {
+		position: absolute;
+		inset: 0;
+		background-color: var(--color-ink);
+		opacity: 0;
+	}
+
+	.hero-copy {
+		position: relative;
+		padding-top: var(--nav-h);
+		padding-bottom: clamp(5rem, 12svh, 8rem);
+	}
+
+	.hero-title {
+		margin-top: 1.25rem;
+		max-width: 17ch;
+		font-size: var(--text-hero);
+		line-height: var(--text-hero--line-height);
+	}
+
+	/* Room for descenders inside SplitText's line masks. */
+	.hero-title :global(.hero-line-mask) {
+		padding-bottom: 0.1em;
+		margin-bottom: -0.1em;
+	}
+
+	.hero-sub {
+		margin-top: 1.5rem;
+		max-width: 34rem;
+		font-size: var(--text-lg);
+		line-height: var(--text-lg--line-height);
+		color: var(--color-bone-muted);
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 2rem;
+	}
+
+	.hero-cue {
+		position: absolute;
+		right: var(--gutter);
+		bottom: clamp(2rem, 6svh, 3.5rem);
+		display: none;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.hero-cue-line {
+		position: relative;
+		width: 3.5rem;
+		height: 1px;
+		overflow: hidden;
+		background-color: var(--hairline);
+	}
+
+	.hero-cue-line::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: var(--color-bone);
+		animation: cue 2.6s var(--ease-soft) infinite;
+	}
+
+	@keyframes cue {
+		from {
+			transform: translateX(-100%);
+		}
+		to {
+			transform: translateX(100%);
+		}
+	}
+
+	@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+		.hero-video {
+			display: block;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.hero-shade {
+			background:
+				linear-gradient(
+					to right,
+					color-mix(in oklab, var(--color-ink) 92%, transparent) 0%,
+					color-mix(in oklab, var(--color-ink) 55%, transparent) 42%,
+					transparent 70%
+				),
+				linear-gradient(to top, var(--color-ink) 0%, transparent 35%),
+				radial-gradient(
+					ellipse at 65% 45%,
+					transparent 45%,
+					color-mix(in oklab, var(--color-ink) 65%, transparent) 100%
+				);
+		}
+
+		.hero-copy {
+			align-self: center;
+			padding-bottom: 0;
+		}
+
+		.hero-cue {
+			display: flex;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.hero {
+			height: 260svh;
+		}
+
+		.hero-media {
+			transform-origin: 66% 52%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero {
+			height: auto;
+		}
+
+		.hero-stage {
+			position: relative;
+			min-height: 100svh;
+			height: auto;
+		}
+
+		.hero-cue {
+			display: none;
+		}
+	}
+</style>

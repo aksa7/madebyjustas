@@ -1,45 +1,26 @@
 ---
+import lockup from '../assets/brand/lockup.svg?raw';
+import signet from '../assets/brand/signet.svg?raw';
+import signetSmall from '../assets/brand/signet-small.svg?raw';
+
 interface Props {
-	size?: 'sm' | 'md';
+	variant?: 'lockup' | 'signet' | 'signet-small';
+	class?: string;
+	/** Accessible name. Omit when the logo sits inside a link that already has one. */
+	label?: string;
 }
 
-const { size = 'md' } = Astro.props;
+const { variant = 'lockup', class: className = '', label } = Astro.props;
+const sources = { lockup, signet, 'signet-small': signetSmall } as const;
 
-const stampClass =
-	size === 'md'
-		? 'gap-3 px-2.5 py-2 sm:px-3 sm:py-2.5'
-		: 'gap-2.5 px-2 py-1.5';
-
-const iconWrapClass = size === 'md' ? 'h-10 w-10 sm:h-11 sm:w-11' : 'h-8 w-8';
-
-const textClass = size === 'md' ? 'text-base sm:text-lg' : 'text-sm';
+// The SVGs use clipPaths (the M flowing into the J), so every instance needs
+// its own ids or two logos on one page would clip each other.
+const uid = Math.random().toString(36).slice(2, 8);
+const a11y = label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"';
+const svg = sources[variant]
+	.replace(/id="([\w-]+)"/g, `id="$1-${uid}"`)
+	.replace(/url\(#([\w-]+)\)/g, `url(#$1-${uid})`)
+	.replace('<svg ', `<svg class="${className}" ${a11y} focusable="false" `);
 ---
 
-<span
-	class:list={[
-		'inline-flex items-center rounded-full border border-neutral-200 bg-white shadow-sm ring-1 ring-neutral-200/50',
-		stampClass,
-	]}
->
-	<span
-		class:list={[
-			'flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent-200 bg-accent-100',
-			iconWrapClass,
-		]}
-	>
-		<img
-			src="/apple-touch-icon.png"
-			alt=""
-			width="44"
-			height="44"
-			class="h-[88%] w-[88%] object-contain"
-			loading="eager"
-			decoding="async"
-		/>
-	</span>
-	<span
-		class:list={['pr-0.5 font-display font-semibold tracking-tight text-neutral-900', textClass]}
-	>
-		madebyjustas<span class="text-warm">.dev</span>
-	</span>
-</span>
+<Fragment set:html={svg} />

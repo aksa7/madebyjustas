@@ -1,0 +1,168 @@
+---
+import Logo from '../Logo.astro';
+import { ABOUT } from '../../lib/content';
+import { SITE } from '../../lib/site';
+---
+
+<section id="about" class="about" aria-labelledby="about-title">
+	<div class="container-page about-grid">
+		<div class="about-head">
+			<p class="label" data-reveal>About</p>
+			<h2 id="about-title" class="about-title" data-reveal>{ABOUT.title}</h2>
+			<div class="about-signet" data-signet-draw>
+				<Logo variant="signet" class="h-full w-auto" />
+			</div>
+		</div>
+
+		<div class="about-body">
+			<div class="about-copy" data-reveal-group>
+				{ABOUT.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+			</div>
+
+			<dl class="about-stats" data-reveal-group>
+				{
+					ABOUT.stats.map((stat) => (
+						<div class="about-stat">
+							<dt class="about-stat-label">{stat.label}</dt>
+							<dd class="about-stat-value">
+								<span data-count={stat.value} data-suffix={stat.suffix}>
+									{`${stat.value}${stat.suffix}`}
+								</span>
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+
+			<div class="about-actions" data-reveal>
+				<a href="#contact" class="btn btn-primary" data-magnetic>
+					{ABOUT.cta}
+					<span class="btn-arrow" aria-hidden="true">→</span>
+				</a>
+				<a
+					href={SITE.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="link-underline about-link"
+				>
+					Say hi on LinkedIn <span aria-hidden="true">↗</span>
+					<span class="sr-only">(opens in a new tab)</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="about-fade" aria-hidden="true"></div>
+</section>
+
+<style>
+	.about {
+		position: relative;
+		padding-top: var(--section-y);
+		background:
+			radial-gradient(
+				ellipse 70% 50% at 20% 45%,
+				color-mix(in oklab, var(--color-rouge) 50%, transparent),
+				transparent 70%
+			),
+			var(--color-ink);
+	}
+
+	.about-grid {
+		display: grid;
+		gap: 3rem;
+	}
+
+	.about-title {
+		margin-top: 1rem;
+		font-size: var(--text-5xl);
+		line-height: var(--text-5xl--line-height);
+	}
+
+	.about-signet {
+		display: none;
+		height: clamp(8rem, 14vw, 13rem);
+		margin-top: 3rem;
+		color: color-mix(in oklab, var(--color-red-light) 55%, transparent);
+	}
+
+	.about-copy {
+		display: grid;
+		gap: 1.25rem;
+		max-width: 38rem;
+		font-size: var(--text-lg);
+		line-height: var(--text-lg--line-height);
+		color: var(--color-bone-muted);
+	}
+
+	.about-copy p:first-child {
+		color: var(--color-bone);
+	}
+
+	.about-stats {
+		display: grid;
+		gap: 1.5rem;
+		margin-block: 3rem 2.5rem;
+		padding-top: 2.5rem;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.about-stat {
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 0.5rem;
+	}
+
+	.about-stat-value {
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-5xl);
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.about-stat-label {
+		font-size: var(--text-sm);
+		color: var(--color-bone-muted);
+	}
+
+	.about-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem 2rem;
+	}
+
+	.about-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		min-height: var(--tap);
+		font-weight: 500;
+	}
+
+	/* The house lights come up: ink fades into the bone finale. */
+	.about-fade {
+		height: clamp(12rem, 40svh, 24rem);
+		margin-top: var(--section-y);
+		background: linear-gradient(in oklab to bottom, transparent, var(--color-bone));
+	}
+
+	@media (min-width: 640px) {
+		.about-stats {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.about-grid {
+			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+			gap: clamp(3rem, 6vw, 6rem);
+		}
+
+		.about-signet {
+			display: block;
+		}
+	}
+</style>

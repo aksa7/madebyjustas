@@ -1,0 +1,339 @@
+---
+import { FAQ, FREE_AUDIT_NOTE, PRICING_NOTE, SERVICES } from '../../lib/content';
+---
+
+<section id="services" class="services" aria-labelledby="services-title">
+	<div class="container-page">
+		<div class="services-head" data-reveal>
+			<p class="label">Ways we can work together</p>
+			<h2 id="services-title" class="services-title">
+				Pick what fits. I'll take care of the rest.
+			</h2>
+			<p class="services-intro">{PRICING_NOTE}</p>
+		</div>
+
+		<ol class="services-list">
+			{
+				SERVICES.map((service) => (
+					<li class="service" data-spotlight data-reveal>
+						<div class="service-index">
+							<span class="label">{service.number}</span>
+						</div>
+						<div class="service-main">
+							<h3 class="service-name">{service.name}</h3>
+							<p class="service-lead">{service.lead}</p>
+						</div>
+						<div class="service-side">
+							<ul class="service-includes">
+								{service.includes.map((item) => (
+									<li>{item}</li>
+								))}
+							</ul>
+							<div class="service-foot">
+								<p class="service-timing">
+									<span class="service-timing-label">Timing</span>
+									{service.timing}
+								</p>
+								<a href="#contact" class="service-cta" data-project-type={service.projectType}>
+									{service.cta}{' '}
+									<span class="btn-arrow" aria-hidden="true">
+										→
+									</span>
+								</a>
+							</div>
+						</div>
+					</li>
+				))
+			}
+		</ol>
+
+		<div class="services-audit" data-reveal>
+			<p class="services-audit-text">{FREE_AUDIT_NOTE}</p>
+			<a href="#contact" class="btn btn-ghost" data-magnetic data-project-type="Free website audit">
+				Ask for your free audit <span class="btn-arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+
+		<div class="faq" data-reveal>
+			<div class="faq-head">
+				<h2 class="faq-title">Questions people usually ask</h2>
+				<p class="faq-sub">
+					Didn't find yours? <a href="#contact" class="link-underline">Just ask me</a>.
+				</p>
+			</div>
+			<div class="faq-list">
+				{
+					FAQ.map((item) => (
+						<details class="faq-item">
+							<summary class="faq-question">
+								<span>{item.question}</span>
+								<span class="faq-icon" aria-hidden="true" />
+							</summary>
+							<p class="faq-answer">{item.answer}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		padding-block: var(--section-y);
+	}
+
+	.services-head {
+		max-width: 44rem;
+	}
+
+	.services-title {
+		margin-top: 1rem;
+		font-size: var(--text-4xl);
+		line-height: var(--text-4xl--line-height);
+	}
+
+	.services-intro {
+		margin-top: 1.5rem;
+		max-width: 34rem;
+		font-size: var(--text-lg);
+		color: var(--color-bone-muted);
+	}
+
+	/* ---- Ledger rows, not boxes. A soft light follows the pointer on desktop. ---- */
+	.services-list {
+		margin-top: clamp(3rem, 6vw, 4.5rem);
+		border-top: 1px solid var(--hairline);
+	}
+
+	.service {
+		--mx: 50%;
+		--my: 50%;
+		position: relative;
+		display: grid;
+		gap: 1.5rem;
+		padding-block: clamp(2rem, 4vw, 3.25rem);
+		border-bottom: 1px solid var(--hairline);
+	}
+
+	.service::before {
+		content: '';
+		position: absolute;
+		inset: 0 calc(var(--gutter) * -1);
+		background: radial-gradient(
+			40rem circle at var(--mx) var(--my),
+			color-mix(in oklab, var(--color-amaranth) 28%, transparent),
+			transparent 60%
+		);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity var(--dur-slow) var(--ease-cinema);
+	}
+
+	.service:hover::before {
+		opacity: 1;
+	}
+
+	.service > * {
+		position: relative;
+	}
+
+	.service-name {
+		font-size: var(--text-3xl);
+		line-height: var(--text-3xl--line-height);
+	}
+
+	.service-lead {
+		margin-top: 1rem;
+		max-width: 30rem;
+		color: var(--color-bone-muted);
+	}
+
+	.service-includes {
+		display: grid;
+		gap: 0.6rem;
+		font-size: var(--text-sm);
+	}
+
+	.service-includes li {
+		display: flex;
+		gap: 0.75rem;
+	}
+
+	.service-includes li::before {
+		content: '';
+		flex-shrink: 0;
+		width: 0.3rem;
+		height: 0.3rem;
+		margin-top: 0.55em;
+		background-color: var(--color-red-light);
+		transform: rotate(45deg);
+	}
+
+	.service-foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem 2rem;
+		margin-top: 1.75rem;
+	}
+
+	.service-timing {
+		display: grid;
+		gap: 0.2rem;
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-variation-settings: 'wdth' 104;
+		letter-spacing: var(--tracking-display);
+		font-size: var(--text-xl);
+		line-height: 1;
+	}
+
+	.service-timing-label {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-variation-settings: normal;
+		letter-spacing: var(--tracking-label);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		color: var(--color-bone-dim);
+	}
+
+	.service-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-height: var(--tap);
+		padding-inline: 1.25rem;
+		border: 1px solid var(--hairline-strong);
+		border-radius: var(--radius-full);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		transition:
+			border-color var(--dur-base) var(--ease-cinema),
+			background-color var(--dur-base) var(--ease-cinema),
+			color var(--dur-base) var(--ease-cinema);
+	}
+
+	.service-cta:hover {
+		border-color: var(--color-bone);
+		background-color: var(--color-bone);
+		color: var(--color-ink);
+	}
+
+	.services-audit {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		margin-top: 2.5rem;
+	}
+
+	.services-audit-text {
+		max-width: 34rem;
+		font-size: var(--text-lg);
+	}
+
+	/* ---- FAQ ---- */
+	.faq {
+		display: grid;
+		gap: 2rem;
+		margin-top: clamp(5rem, 10vw, 8rem);
+	}
+
+	.faq-title {
+		font-size: var(--text-3xl);
+		line-height: var(--text-3xl--line-height);
+	}
+
+	.faq-sub {
+		margin-top: 1rem;
+		color: var(--color-bone-muted);
+	}
+
+	.faq-list {
+		border-top: 1px solid var(--hairline);
+	}
+
+	.faq-item {
+		border-bottom: 1px solid var(--hairline);
+	}
+
+	.faq-question {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		min-height: 4.5rem;
+		padding-block: 1.25rem;
+		font-size: var(--text-lg);
+		font-weight: 500;
+		list-style: none;
+		cursor: pointer;
+	}
+
+	.faq-question::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-icon {
+		position: relative;
+		flex-shrink: 0;
+		width: 0.9rem;
+		height: 0.9rem;
+	}
+
+	.faq-icon::before,
+	.faq-icon::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background-color: var(--color-red-light);
+		transition: transform var(--dur-slow) var(--ease-cinema);
+	}
+
+	.faq-icon::after {
+		transform: rotate(90deg);
+	}
+
+	.faq-item[open] .faq-icon::after {
+		transform: rotate(0deg);
+	}
+
+	.faq-answer {
+		max-width: 42rem;
+		padding-bottom: 1.5rem;
+		color: var(--color-bone-muted);
+	}
+
+	@media (min-width: 768px) {
+		.service {
+			grid-template-columns: 3rem minmax(0, 1fr);
+		}
+
+		.service-side {
+			grid-column: 2;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.service {
+			grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1fr);
+			column-gap: clamp(2rem, 4vw, 4rem);
+		}
+
+		.service-side {
+			grid-column: 3;
+		}
+
+		.faq {
+			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+			gap: clamp(3rem, 6vw, 6rem);
+		}
+	}
+</style>

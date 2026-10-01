@@ -1,347 +1,306 @@
-export interface ServiceOffering {
-	number: string;
+import type { ImageMetadata } from 'astro';
+import aksendoDesktop from '../assets/work/aksendo-desktop.webp';
+import aksendoMobile from '../assets/work/aksendo-mobile.webp';
+import resetDesktop from '../assets/work/21dayreset-desktop.webp';
+import resetMobile from '../assets/work/21dayreset-mobile.webp';
+import decksDesktop from '../assets/work/decksandstories-desktop.webp';
+import decksMobile from '../assets/work/decksandstories-mobile.webp';
+import tvortekaDesktop from '../assets/work/tvorteka-desktop.webp';
+import tvortekaMobile from '../assets/work/tvorteka-mobile.webp';
+import blumuDesktop from '../assets/work/blumu-desktop.webp';
+import blumuMobile from '../assets/work/blumu-mobile.webp';
+import elesenDesktop from '../assets/work/elesen2026-desktop.webp';
+import elesenMobile from '../assets/work/elesen2026-mobile.webp';
+
+export const HERO = {
+	eyebrow: "Hi, I'm Justas · Web developer",
+	title: 'I can make your Pinterest dreams come true.',
+	lead: "Saved a website you love? Send me the pin. I'll design and hand-code it for your business, make it load fast, and get it found on Google and in ChatGPT.",
+	primaryCta: 'Send me your pins',
+	secondaryCta: 'See my work',
+};
+
+export const PROOF_POINTS = [
+	'64+ websites shipped',
+	'Any pin, built for real',
+	'New build in 1–2 weeks',
+	'Found on Google and in ChatGPT',
+	'Hand-coded, never templated',
+	'You talk to me, not an account manager',
+];
+
+export const MANIFESTO =
+	"Most websites could be great. They're just not built with enough care. So I sweat the parts you don't see: how fast it opens on a bad connection, how clearly Google and ChatGPT can read it, how it feels the first second someone lands. Speed isn't an add-on I sell you later. It's just how I build.";
+
+export interface Project {
+	slug: string;
 	name: string;
-	summary: string;
-	duration: string;
-	deliverables: string[];
+	url: string;
+	category: string;
+	role: string;
+	year: string;
+	description: string;
+	desktop: ImageMetadata;
+	mobile: ImageMetadata;
+	alt: string;
 }
 
-export const SERVICES: ServiceOffering[] = [
+export const PROJECTS: Project[] = [
+	{
+		slug: 'aksendo',
+		name: 'Aksendo',
+		url: 'https://www.aksendo.com',
+		category: 'Artist brand · Editorial site',
+		role: 'Designer & Developer',
+		year: '2026',
+		description:
+			'A cinematic, dark editorial site for a house DJ and producer. Shows, releases and mixes woven into one immersive, typographic scroll.',
+		desktop: aksendoDesktop,
+		mobile: aksendoMobile,
+		alt: 'Aksendo homepage: black and white crowd photo with the AKSENDO wordmark',
+	},
+	{
+		slug: '21dayreset',
+		name: '21-Day Reset',
+		url: 'https://www.21dayreset.me',
+		category: 'Product · CRO landing',
+		role: 'Designer & Developer',
+		year: '2026',
+		description:
+			'A conversion-focused landing for a digital behavioural-reset workbook. A sharp offer, a real guarantee, and a public fact-check.',
+		desktop: resetDesktop,
+		mobile: resetMobile,
+		alt: '21-Day Reset landing page with the headline Stop living on autopilot and the workbook cover',
+	},
+	{
+		slug: 'decksandstories',
+		name: 'Decks&Stories',
+		url: 'https://decksandstories.com',
+		category: 'Platform',
+		role: 'Creative Tech & Digital Lead',
+		year: '2025–2026',
+		description:
+			'A global, community-driven music platform with a custom audio player, built to scale across episodes and countries.',
+		desktop: decksDesktop,
+		mobile: decksMobile,
+		alt: 'Decks&Stories homepage with the round logo and the line International DJ mixes from around the world',
+	},
+	{
+		slug: 'tvorteka',
+		name: 'Tvorteka',
+		url: 'https://tvorteka.lt',
+		category: 'Service business',
+		role: 'Designer & Developer',
+		year: '2026',
+		description:
+			'A premium site for a fence and gate maker. A product catalogue, an interactive price calculator, and content built to get found locally.',
+		desktop: tvortekaDesktop,
+		mobile: tvortekaMobile,
+		alt: 'Tvorteka homepage with a brick and metal fence and the headline Dizainas, kokybė ir ilgaamžiškumas viename',
+	},
+	{
+		slug: 'blumu',
+		name: 'Blumu',
+		url: 'https://blumu.eu',
+		category: 'Product · App marketing',
+		role: 'Designer & Developer',
+		year: '2026',
+		description:
+			'A benefit-led launch page for a services-marketplace app, built to turn visitors into early sign-ups.',
+		desktop: blumuDesktop,
+		mobile: blumuMobile,
+		alt: 'Blumu homepage with a photo grid of local services and the app shown on a phone',
+	},
+	{
+		slug: 'elesen2026',
+		name: 'Elesen Show 2026',
+		url: 'https://www.elesen2026.lt',
+		category: 'Event microsite',
+		role: 'Designer & Developer',
+		year: '2026',
+		description:
+			'A cinema-themed event microsite. Layered cut-out art direction and playful motion turn an invitation into an experience.',
+		desktop: elesenDesktop,
+		mobile: elesenMobile,
+		alt: 'Elesen Show 2026 microsite: The Greatest elesen show lettering over a red velvet curtain',
+	},
+];
+
+export const WORK_CTA = {
+	line: 'Like what you see? The next one could be yours.',
+	cta: "Let's build yours",
+};
+
+/** The Pinterest promise: typographic "pins", no fabricated screenshots. */
+export interface Pin {
+	title: string;
+	note: string;
+}
+
+export const PINS_INTRO = {
+	eyebrow: 'The Pinterest promise',
+	title: "Found it on Pinterest? I'll build it.",
+	lead: "That boutique hotel site with the big photos. The calm, minimal clinic page. The portfolio with the gorgeous type. You've been saving them for a reason.",
+	body: "Send me the pins you keep coming back to and I'll turn them into a site that's actually yours: your words, your brand, your customers. And unlike a pin, it'll load fast and show up in search.",
+	cta: 'Send me your pins',
+};
+
+export const PINS: Pin[] = [
+	{ title: 'Boutique hotel', note: 'Warm, editorial, full-bleed photos' },
+	{ title: 'Med spa', note: 'Calm, airy, lots of white space' },
+	{ title: 'Law firm', note: 'Serious type, quiet confidence' },
+	{ title: 'Restaurant', note: 'Moody, cinematic, menu that sings' },
+	{ title: 'Studio portfolio', note: 'Bold grid, big names, no clutter' },
+	{ title: 'Wellness brand', note: 'Soft tones, slow scroll, real care' },
+];
+
+export const PIN_STEPS = [
+	{
+		number: '01',
+		name: 'Send me your pins',
+		body: 'Three to five is plenty. Tell me what you love about each one.',
+	},
+	{
+		number: '02',
+		name: 'I design and build it',
+		body: 'Hand-coded, tailored to your business, with your words and your brand.',
+	},
+	{
+		number: '03',
+		name: 'You launch in 1–2 weeks',
+		body: 'Fast, found in search, and looked after if you want me to.',
+	},
+];
+
+export interface Service {
+	number: string;
+	name: string;
+	lead: string;
+	includes: string[];
+	timing: string;
+	cta: string;
+	/** Preselects the matching option in the contact form. */
+	projectType: string;
+}
+
+export const SERVICES: Service[] = [
 	{
 		number: '01',
 		name: 'New Build',
-		summary:
-			'From scratch: discovery and content audit, a custom design system, a hand-coded build tailored to the project, schema and GEO foundations, deployed to Cloudflare.',
-		duration: '4–6 weeks',
-		deliverables: [
-			'Discovery and content audit',
-			'Custom design system',
-			'Clean, hand-coded build tailored to the project',
-			'Schema and GEO foundations',
-			'Cloudflare deploy',
-			'2 rounds of revisions',
-			'30 days of post-launch support',
+		lead: "Starting from scratch, or from a pin? We'll figure out what your site needs to do, then I'll design and build it properly, from the first line of code.",
+		includes: [
+			'Discovery call and content plan',
+			'A design made for your brand',
+			'Hand-coded, fast build',
+			'Schema and AI-search foundations',
+			'A round of revisions',
+			'30 days of support after launch',
 		],
+		timing: '1–2 weeks',
+		cta: 'Start a new build',
+		projectType: 'New website',
 	},
 	{
 		number: '02',
 		name: 'Audit & Optimize',
-		summary:
-			'A 5-dimension audit of your existing site, a prioritized action list, speed and schema fixes, and a local SEO review.',
-		duration: '2–3 weeks',
-		deliverables: [
-			'5-dimension audit',
-			'Prioritized action list',
-			'Speed optimization',
-			'Schema fixes',
-			'FAQ structure',
-			'Local SEO and Google Business Profile review',
-			'1 round of revisions',
+		lead: 'Already have a site that should be doing more? I find what is slowing it down or hiding it, then fix what matters most.',
+		includes: [
+			'Five-part audit: speed, SEO, AI search, UX, trust',
+			'A prioritised action list',
+			'Speed and structured-data fixes',
+			'FAQ and local SEO review',
 		],
+		timing: '1 week, max',
+		cta: 'Fix my site',
+		projectType: 'Audit & optimize my current site',
 	},
 	{
 		number: '03',
 		name: 'Maintenance',
-		summary:
-			'A monthly retainer: performance and GEO citation reporting, content and build updates, priority response, quarterly strategy review.',
-		duration: 'Monthly',
-		deliverables: [
-			'Monthly performance and GEO citation report',
-			'Up to 8 hours of content and build updates',
-			'Priority response',
-			'Quarterly strategy review',
+		lead: 'Want someone who just looks after it? I keep your site fast, current and visible, and tell you what changed every month.',
+		includes: [
+			'Monthly performance and AI-search report',
+			'Up to 8 hours of updates a month',
+			'Priority replies',
+			'A quarterly strategy chat',
 		],
+		timing: 'Monthly',
+		cta: 'Look after my site',
+		projectType: 'Ongoing maintenance',
 	},
 ];
 
-export const PRICING_NOTE = 'Quote after a short discovery call.';
+export const PRICING_NOTE =
+	'Every project gets its own fixed price after a quick, friendly discovery call. No hourly guessing, no surprise invoices.';
 
-export interface ProcessStep {
-	number: string;
-	name: string;
-	description: string;
-	details: string[];
-}
-
-export const PROCESS_STEPS: ProcessStep[] = [
-	{
-		number: '01',
-		name: 'Audit',
-		description: 'The site is analyzed across five dimensions: speed, SEO, GEO, UX, trust.',
-		details: ['Speed', 'SEO', 'GEO', 'UX', 'Trust'],
-	},
-	{
-		number: '02',
-		name: 'Build',
-		description:
-			'A fast, hand-coded build with clean code, tailored to the project rather than one fixed stack.',
-		details: [
-			'Clean code, tailored to the project',
-			'Hand-coded, no page builder',
-			'Cloudflare Pages deploy',
-			'Served from a global CDN',
-		],
-	},
-	{
-		number: '03',
-		name: 'Rank',
-		description: 'Schema markup, FAQ structure, local SEO from day one.',
-		details: ['Schema markup', 'FAQ structure', 'Local SEO from day one'],
-	},
-];
+export const FREE_AUDIT_NOTE =
+	"Not sure where to start? I'll audit your current site for free and tell you honestly what I'd fix first.";
 
 export interface FaqItem {
 	question: string;
 	answer: string;
 }
 
-export const SERVICES_FAQ: FaqItem[] = [
+export const FAQ: FaqItem[] = [
 	{
-		question: 'How much does a project cost?',
+		question: 'Can you really build a site I found on Pinterest?',
 		answer:
-			'Every project starts with a short discovery call, then a fixed quote based on scope. No hourly guessing, no surprise invoices.',
+			"Yes. Send me the pins and I'll design a site in that spirit, made for your business rather than copied: your brand, your words, your customers. It'll also load fast and be built to show up in search, which most pins never are.",
 	},
 	{
-		question: 'How long does a New Build take?',
+		question: 'How long does a new website take?',
 		answer:
-			'A New Build typically takes 4–6 weeks from discovery to launch, including 2 rounds of revisions and 30 days of post-launch support.',
+			'A new build usually goes live in 1–2 weeks from our first call, including a round of revisions. An audit and fixes for an existing site take a week at most.',
 	},
 	{
-		question: 'How long does an Audit & Optimize take?',
+		question: 'How much does a website cost?',
 		answer:
-			'An Audit & Optimize engagement runs 2–3 weeks: a 5-dimension audit followed by a prioritized action list you can act on immediately.',
+			'It depends on what your site needs to do, so every project gets a fixed quote after a short discovery call. You know the full price before anything starts.',
 	},
 	{
-		question: "What's included in the 5-dimension audit?",
+		question: 'What do you need from me?',
 		answer:
-			'Every audit examines five dimensions: speed, SEO, GEO (how AI tools like ChatGPT and Perplexity surface your site), UX, and trust.',
+			"Your pins or a few sites you like, your logo if you have one, and a rough idea of what the site should do. If you don't have the words yet, I'll help you write them.",
 	},
 	{
-		question: 'What happens after launch?',
+		question: 'What does "found in AI search" mean?',
 		answer:
-			'New Build projects include 30 days of post-launch support. After that, ongoing Maintenance is available as a monthly retainer.',
+			"More people now ask ChatGPT or Google's AI answers instead of scrolling results. I structure your content and data so those tools can understand your business and recommend it.",
 	},
 	{
-		question: 'Who is this for?',
+		question: 'Who will I actually work with?',
 		answer:
-			'Service businesses (clinics, studios, professional practices) where speed, trust, and local or AI-driven visibility directly drive inquiries.',
+			'Me, Justas. I design, build and look after every site myself, so you always talk to the person writing the code.',
 	},
 ];
 
-export const PROOF_POINTS = ['53+ websites shipped', 'Sub-1s load times', 'GEO + SEO baked in'];
+export const ABOUT = {
+	title: "Hi, I'm Justas.",
+	paragraphs: [
+		"I'm an independent web developer with a software engineering background. I've shipped 64+ websites, mostly for service businesses: med spas, aesthetic clinics, law firms, hospitality and wellness brands. Some are solo practices, some run several locations.",
+		"It's just me. You talk to the person building your site. No account managers, no hand-offs, no surprise invoices.",
+		'I care about the small details most people never notice, because your customers feel them anyway. If that sounds like the kind of person you want building yours, I would love to hear from you.',
+	],
+	stats: [
+		{ value: 64, suffix: '+', label: 'websites shipped' },
+		{ value: 1, suffix: '', label: 'person you talk to, start to finish' },
+		{ value: 2, suffix: '', label: 'weeks or less from first call to launch' },
+	],
+	cta: "Let's talk about your project",
+};
 
-export const LAST_SHIPPED = 'June 2026';
+export const CONTACT = {
+	title: "Tell me what you're building.",
+	lead: 'Write a few lines about your business and what you need. Or just send me your pins. I read every message myself and reply personally.',
+	success: "Thank you, your message is on its way to me. I'll get back to you personally.",
+	ps: "P.S. Not sure what you need yet? That's completely fine. Say hi anyway and we'll figure it out together.",
+};
 
-export interface ResultStat {
-	value: string;
-	label: string;
-}
-
-export const RESULT_STATS: ResultStat[] = [
-	{ value: '53+', label: 'Websites shipped' },
-	{ value: '<1s', label: 'Typical load time' },
-	{ value: '90+', label: 'Lighthouse score we aim for' },
-	{ value: '0', label: 'Agencies in between' },
-];
-
-export interface CaseStudySection {
-	heading: string;
-	body: string;
-}
-
-import type { ImageMetadata } from 'astro';
-import decksImage from '../assets/work/decks-and-stories.png';
-import tvortekaImage from '../assets/work/tvorteka.png';
-import blumuImage from '../assets/work/blumu.png';
-import blumuAppImage from '../assets/work/blumu-app.png';
-import eventsAgencyImage from '../assets/work/events-agency.png';
-import renginiuLabImage from '../assets/work/renginiu-lab.png';
-
-export interface WorkProject {
-	slug: string;
-	name: string;
-	category: string;
-	role: string;
-	year: string;
-	/** Public URL, omitted for private/anonymized projects. */
-	url?: string;
-	/** Short blurb reused on the index card and the case study hero. */
-	summary: string;
-	context: string;
-	whatIDid: string;
-	/** Qualitative only, no speed/performance numbers. */
-	highlights: string[];
-	stack: string[];
-	/** Optimized project image (astro:assets). */
-	image: ImageMetadata;
-	/** Alt text for the project image. */
-	imageAlt: string;
-	/** Portrait screenshots (e.g. mobile apps) use contain instead of cover. */
-	imageFit?: 'cover' | 'contain';
-}
-
-export const WORK_PROJECTS: WorkProject[] = [
-	{
-		slug: 'blumu',
-		name: 'Blumu Web',
-		category: 'Product',
-		role: 'Web Developer & Designer',
-		year: '2026',
-		url: 'https://blumu.eu',
-		summary:
-			'A conversion-focused marketing site for a services-marketplace app that connects clients with verified local pros in real time. A clean, benefit-led launch page built to drive early sign-ups.',
-		context:
-			'A geolocation-based mobile marketplace connecting people who need help with verified local professionals: 0% commission, direct in-app chat, ratings. The site is the app’s launch and acquisition page.',
-		whatIDid:
-			'Built the marketing landing that positions the product and drives downloads and sign-ups. Structured it as a value ladder: hero promise, "what is it", benefits grid, transparent pricing, FAQ, contact. Each section ends in a clear CTA.',
-		highlights: [
-			'Benefit-led architecture serving two audiences: clients and pros',
-			'Transparent free-trial-to-paid pricing block',
-			'Objection-handling FAQ',
-			'Responsive, image-optimized layout with dual app-store entry points',
-		],
-		stack: ['Next.js', 'Optimized responsive images', 'Component-based sections'],
-		image: blumuImage,
-		imageAlt: 'Blumu website homepage for the local-services marketplace app',
-	},
-	{
-		slug: 'tvorteka',
-		name: 'Tvorteka',
-		category: 'Service business',
-		role: 'Web Developer & Designer',
-		year: '2026',
-		url: 'https://tvorteka.lt',
-		summary:
-			'A premium website for a fence and gate manufacturer: a clean, multi-page build with a product catalogue, an interactive price calculator, and structured content designed to get found and convert local customers.',
-		context:
-			'A Lithuanian manufacturer of premium sheet-metal fences, gates and gate automation, producing in-house and installing nationwide. The site needs to communicate craftsmanship and trust, present a full product range, and turn local searches into quote requests.',
-		whatIDid:
-			'Designed and built a multi-page site (Home, Products, Calculator, Services, About, Contact) with a clear conversion path. Structured the product catalogue by profile type with detailed specs, built an interactive price calculator, and organized trust signals, a transparent 3-step process, and an FAQ.',
-		highlights: [
-			'Interactive price calculator',
-			'Structured product catalogue with per-product spec pages',
-			'Trust architecture: partners, guarantees, process, stats',
-			'FAQ built for search and AI answers',
-			'Local-SEO-ready metadata (Open Graph, geo/service targeting for Kaunas + nationwide)',
-			'Quote-request form with success/error states',
-		],
-		stack: [
-			'Hand-coded static build',
-			'WebP assets',
-			'Product catalogue + calculator',
-			'Schema-ready structured content',
-			'Lithuanian copy',
-		],
-		image: tvortekaImage,
-		imageAlt: 'Tvorteka website homepage with the premium fence and gate hero',
-	},
-	{
-		slug: 'events-agency',
-		name: 'inSpotlight',
-		category: 'Agency',
-		role: 'Web Developer',
-		year: '2025–2026',
-		url: 'https://inspotlight.lt',
-		summary:
-			'A cinematic website for inSpotlight, an established communications and events agency: a full-screen video hero and a portfolio organized by event type, built to sell craft and a decade of experience.',
-		context:
-			'inSpotlight is an agency creating B2B conferences, brand launches, and private and public events. It needed a site that conveys premium craft while organizing a broad body of work.',
-		whatIDid:
-			'Delivered a cinematic first impression and a clear portfolio structure: a full-screen video hero, positioning story, portfolio segmented by event type, an editorial "behind the scenes" section, and contact.',
-		highlights: [
-			'Full-screen video hero with controls',
-			'Portfolio organized into clear service categories',
-			'Editorial content to humanize the brand and support SEO',
-			'Complete contact and social presence',
-		],
-		stack: ['WordPress (theme-based build + customization)', 'Video hero'],
-		image: eventsAgencyImage,
-		imageAlt: 'inSpotlight communications and events agency website homepage',
-	},
-	{
-		slug: 'renginiu-lab',
-		name: 'Renginių LAB',
-		category: 'Service business',
-		role: 'Web Developer & Designer',
-		year: '2026',
-		url: 'https://renginiulab.lt',
-		summary:
-			'A website for a full-service event venue in Kaunas that turns local searches into booking inquiries. Organized by occasion, backed by a deep FAQ and local SEO built to get found on Google and AI search.',
-		context:
-			'Renginių Laboratorija is a full-service event space in Kaunas seating up to 100 guests, hosting corporate events, conferences, weddings, birthdays, and private parties. The site had to convey warmth and trust, present every type of occasion clearly, and capture inquiries the venue answers within 24 hours.',
-		whatIDid:
-			'Designed and built a conversion-focused site organized by occasion, with a founder story, a clear full-service positioning, a location and contact block, and a deep FAQ that answers the real questions people ask before booking a venue.',
-		highlights: [
-			'Occasion-based structure: one clear path per event type',
-			'Deep FAQ built for Google and AI answers: pricing, capacity, parking, booking',
-			'Local SEO for "event space in Kaunas" with address and map',
-			'Founder story section that builds trust',
-			'Fast static build with warm, inviting imagery',
-		],
-		stack: [
-			'Hand-coded static build',
-			'WebP imagery',
-			'FAQ + schema-ready content',
-			'Local SEO (Kaunas)',
-			'Lithuanian copy',
-		],
-		image: renginiuLabImage,
-		imageAlt: 'Renginių LAB website homepage for the Kaunas event venue',
-	},
-	{
-		slug: 'decks-and-stories',
-		name: 'Decks&Stories',
-		category: 'Platform',
-		role: 'Creative Tech & Digital Lead',
-		year: '2025–2026',
-		url: 'https://decksandstories.com',
-		summary:
-			'A global, community-driven electronic music platform where every DJ mix comes with the human story behind it. A fast static build with a custom audio player and content that scales as the series grows, featuring artists from 26+ countries.',
-		context:
-			'An independent, collaboration-first electronic music platform where any DJ can share their sound and story regardless of following. The site is the platform’s home: episodes, studio sessions, an interactive "Pick a Question" series, a gallery, and submission funnels.',
-		whatIDid:
-			'Led creative-tech and digital direction end to end: architecture, front-end build, and content structure. Designed a multi-section experience with a custom audio player, newsletter capture, a community question form, and a "featured countries" tracker.',
-		highlights: [
-			'Custom-built audio player instead of a heavy embed',
-			'Optimized WebP/AVIF image pipeline',
-			'Full SEO/social layer: canonical, Open Graph, Twitter cards, descriptive alt text',
-			'Content architecture that scales with every new episode',
-		],
-		stack: ['Hand-coded static HTML/CSS/JS', 'WebP/AVIF assets', 'Custom JS audio player'],
-		image: decksImage,
-		imageAlt: 'Decks&Stories website homepage with the platform logo',
-	},
-	{
-		slug: 'blumu-app',
-		name: 'Blumu App',
-		category: 'Mobile app',
-		role: 'Full-Stack Developer',
-		year: '2026',
-		url: 'https://blumu.eu',
-		summary:
-			'A React Native (Expo) marketplace app connecting clients with local service providers on iOS and Android from a single codebase — with a NestJS backend, real-time messaging, Stripe subscriptions, and production security hardening ahead of App Store launch.',
-		context:
-			'Blumu is a geolocation-based marketplace where clients post tasks and verified local pros respond in real time — 0% commission, direct in-app chat, ratings. The mobile app is the core product; blumu-web is the public-facing launch presence.',
-		whatIDid:
-			'Built the cross-platform app in React Native (Expo) and the API in NestJS with PostgreSQL (Prisma ORM) on Railway. Shipped JWT auth with email verification, a multi-step tasker onboarding wizard, admin moderation with email notifications, and real-time messaging with proposal accept/reject. Integrated Stripe for subscription billing — setup intents, webhook processing with idempotency and retry safety, and a trial → active → expired lifecycle with automated cron reminders. Hardened production security before App Store submission: rate limiting (NestJS Throttler), HTTP security headers (Helmet), strict CORS, and trust proxy config for Railway. Also built blumu-web, the public marketing site for the platform.',
-		highlights: [
-			'Single Expo codebase shipping to both iOS and Android',
-			'JWT auth with email verification and multi-step tasker onboarding',
-			'Admin moderation flow with email notifications',
-			'Real-time messaging with proposal accept/reject',
-			'Stripe subscriptions: setup intents, idempotent webhooks, trial lifecycle + cron reminders',
-			'Production hardening: Throttler rate limiting, Helmet, strict CORS, Railway trust proxy',
-		],
-		stack: [
-			'React Native (Expo)',
-			'NestJS',
-			'PostgreSQL + Prisma',
-			'Railway',
-			'Stripe',
-			'JWT + email verification',
-		],
-		image: blumuAppImage,
-		imageAlt: 'Blumu mobile app welcome screen on iOS',
-		imageFit: 'contain',
-	},
+export const PROJECT_TYPES = [
+	'New website',
+	'Build what I found on Pinterest',
+	'Audit & optimize my current site',
+	'Free website audit',
+	'Ongoing maintenance',
+	'Something else',
 ];

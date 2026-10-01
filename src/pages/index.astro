@@ -1,19 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/home/Hero.astro';
-import Manifesto from '../components/home/Manifesto.astro';
-import ServicesTeaser from '../components/home/ServicesTeaser.astro';
-import WorkTeaser from '../components/home/WorkTeaser.astro';
-import CtaBanner from '../components/CtaBanner.astro';
+import JsonLd from '../components/JsonLd.astro';
+import Preloader from '../components/ui/Preloader.astro';
+import Nav from '../components/ui/Nav.astro';
+import StickyCta from '../components/ui/StickyCta.astro';
+import Hero from '../components/sections/Hero.astro';
+import Proof from '../components/sections/Proof.astro';
+import Manifesto from '../components/sections/Manifesto.astro';
+import Work from '../components/sections/Work.astro';
+import Pins from '../components/sections/Pins.astro';
+import Services from '../components/sections/Services.astro';
+import About from '../components/sections/About.astro';
+import Contact from '../components/sections/Contact.astro';
+import Footer from '../components/sections/Footer.astro';
+import { FAQ } from '../lib/content';
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: FAQ.map((item) => ({
+		'@type': 'Question',
+		name: item.question,
+		acceptedAnswer: { '@type': 'Answer', text: item.answer },
+	})),
+};
 ---
 
-<BaseLayout
-	title="Home"
-	description="Fast, AI-optimized websites for service businesses. No agency overhead, direct communication, clear scope."
->
-	<Hero />
-	<Manifesto />
-	<ServicesTeaser />
-	<WorkTeaser />
-	<CtaBanner eyebrow="Availability" heading="Accepting 2 new projects for Q3 2026." />
+<BaseLayout>
+	<JsonLd slot="head" schema={faqSchema} />
+	<Preloader />
+	<a href="#main" class="skip-link">Skip to content</a>
+	<Nav />
+	<main id="main">
+		<Hero />
+		<Proof />
+		<Manifesto />
+		<Work />
+		<Pins />
+		<Services />
+		<About />
+		<Contact />
+	</main>
+	<Footer />
+	<StickyCta />
 </BaseLayout>
+
+<script>
+	import '../scripts/main';
+</script>

@@ -4,7 +4,6 @@ import { DUR, EASE, MQ } from './env';
 
 const REEL_ANGLE = 50; // degrees between neighbouring cards on the reel
 const IDLE_ADVANCE_MS = 7000;
-const TRACK_ADVANCE_MS = 6500;
 
 interface Showcase {
 	section: HTMLElement;
@@ -258,14 +257,79 @@ export function initShowcase(lenis: Lenis | null): void {
 		};
 	});
 
-	// Tablets, phones and reduced motion: a native swipeable track.
-	mm.add(`${MQ.compact}, ${MQ.reduced}`, () => {
-		const reduced = window.matchMedia(MQ.reduced).matches;
+	// Tablets and phones: the section pins and vertical scroll pushes the strip sideways.
+	mm.add(MQ.compact, () => {
+		document.documentElement.dataset.track = 'on';
+		const viewport = s.reel.parentElement as HTMLElement;
+		const state = { p: 0 };
+		let step = 0;
+		let centre = 0;
+
+		const render = () => {
+			s.reel.style.transform = `translate3d(${centre - state.p * step}px, 0, 0)`;
+			s.cards.forEach((card, i) => {
+				card.style.setProperty('--dim', String(Math.min(Math.abs(i - state.p) * 0.7, 0.6)));
+			});
+			const index = Math.round(state.p);
+			if (index !== active) {
+				setActive(index, true);
+				flash();
+			}
+		};
+		const layout = () => {
+			const first = s.cards[0];
+			const second = s.cards[1];
+			if (!first) return;
+			step = second ? second.offsetLeft - first.offsetLeft : first.offsetWidth;
+			centre = (viewport.clientWidth - first.offsetWidth) / 2;
+			render();
+		};
+		layout();
+		const resizeObserver = new ResizeObserver(layout);
+		resizeObserver.observe(viewport);
+
+		const tween = gsap.to(state, {
+			p: total - 1,
+			ease: 'none',
+			onUpdate: render,
+			scrollTrigger: {
+				trigger: s.pin,
+				start: 'top top',
+				end: 'bottom bottom',
+				scrub: 0.6,
+				snap: {
+					snapTo: (value: number) => Math.round(value * (total - 1)) / (total - 1),
+					inertia: false,
+					duration: { min: 0.3, max: 0.7 },
+					delay: 0.1,
+					ease: 'power2.inOut',
+				},
+			},
+		});
+		const trigger = tween.scrollTrigger;
+
+		goTo = (index) => {
+			if (!trigger) return;
+			const target = trigger.start + ((trigger.end - trigger.start) * index) / (total - 1);
+			if (lenis) lenis.scrollTo(target, { duration: 1.2 });
+			else window.scrollTo({ top: target, behavior: 'smooth' });
+		};
+
+		return () => {
+			delete document.documentElement.dataset.track;
+			resizeObserver.disconnect();
+			s.reel.style.transform = '';
+			s.cards.forEach((card) => card.style.removeProperty('--dim'));
+		};
+	});
+
+	// Reduced motion: a plain native swipe track, nothing moves on its own.
+	mm.add(MQ.reduced, () => {
 		const step = () =>
 			s.cards[1] ? s.cards[1].offsetLeft - s.cards[0].offsetLeft : s.reel.clientWidth;
 
 		goTo = (index) => {
-			s.reel.scrollTo({ left: step() * index, behavior: reduced ? 'auto' : 'smooth' });
+			s.reel.scrollTo({ left: step() * index });
 		};
 
 		let frame = 0;
@@ -273,40 +337,13 @@ export function initShowcase(lenis: Lenis | null): void {
 			cancelAnimationFrame(frame);
 			frame = requestAnimationFrame(() => {
 				const index = Math.min(total - 1, Math.max(0, Math.round(s.reel.scrollLeft / step())));
-				setActive(index, !reduced);
+				setActive(index, false);
 			});
 		};
 		s.reel.addEventListener('scroll', onScroll, { passive: true });
 
-		let lastInteraction = 0;
-		const markInteraction = () => {
-			lastInteraction = Date.now();
-		};
-		s.reel.addEventListener('pointerdown', markInteraction, { passive: true });
-		s.reel.addEventListener('touchstart', markInteraction, { passive: true });
-
-		let inView = false;
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				inView = Boolean(entry?.isIntersecting);
-			},
-			{ threshold: 0.5 },
-		);
-		observer.observe(s.reel);
-
-		const interval = reduced
-			? 0
-			: window.setInterval(() => {
-					if (paused || !inView || Date.now() - lastInteraction < TRACK_ADVANCE_MS + 2000) return;
-					goTo((active + 1) % total);
-				}, TRACK_ADVANCE_MS);
-
 		return () => {
 			s.reel.removeEventListener('scroll', onScroll);
-			s.reel.removeEventListener('pointerdown', markInteraction);
-			s.reel.removeEventListener('touchstart', markInteraction);
-			observer.disconnect();
-			window.clearInterval(interval);
 			cancelAnimationFrame(frame);
 		};
 	});

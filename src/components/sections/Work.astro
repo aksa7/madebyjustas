@@ -483,6 +483,100 @@ const projects = await Promise.all(
 		perspective: 2200px;
 	}
 
+	/* ---- Tablets and phones: pinned stage, the strip slides through the frame. ---- */
+	:global(html[data-track='on']) .work {
+		padding-top: 0;
+	}
+
+	:global(html[data-track='on']) .work-pin {
+		height: calc(100svh + (var(--count) - 1) * 55svh);
+	}
+
+	:global(html[data-track='on']) .work-stage {
+		position: sticky;
+		top: 0;
+		height: 100svh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding-top: calc(var(--nav-h) * 0.8);
+		padding-bottom: 1rem;
+		overflow: hidden;
+	}
+
+	:global(html[data-track='on']) .work-grid {
+		--card-h: min(44svh, 110vw);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		min-height: 0;
+	}
+
+	:global(html[data-track='on']) .work-title {
+		margin-top: 0.5rem;
+		font-size: var(--text-3xl);
+		line-height: var(--text-3xl--line-height);
+	}
+
+	:global(html[data-track='on']) .work-viewport {
+		height: var(--card-h);
+	}
+
+	:global(html[data-track='on']) .work-reel {
+		overflow: visible;
+		scroll-snap-type: none;
+		will-change: transform;
+	}
+
+	:global(html[data-track='on']) .work-card {
+		flex-basis: auto;
+		width: calc(var(--card-h) * 9 / 16);
+		height: var(--card-h);
+		aspect-ratio: auto;
+	}
+
+	:global(html[data-track='on']) .work-captions {
+		min-height: 0;
+	}
+
+	:global(html[data-track='on']) .work-text {
+		gap: 0.5rem;
+	}
+
+	:global(html[data-track='on']) .work-desc {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		font-size: var(--text-sm);
+	}
+
+	:global(html[data-track='on']) .work-meta,
+	:global(html[data-track='on']) .work-pause,
+	:global(html[data-track='on']) .work-head .label {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		:global(html[data-track='on']) .work-grid {
+			--card-h: min(46svh, 50vw);
+		}
+
+		:global(html[data-track='on']) .work-card {
+			width: calc(var(--card-h) * 16 / 10);
+		}
+	}
+
+	@media (max-height: 700px) {
+		:global(html[data-track='on']) .work-grid {
+			--card-h: min(40svh, 110vw);
+		}
+
+		:global(html[data-track='on']) .work-desc {
+			-webkit-line-clamp: 2;
+		}
+	}
+
 	:global(html[data-reel='on']) .work-reel {
 		position: absolute;
 		inset: 0;
